@@ -13,6 +13,7 @@
 .dashboard-right-cell{
     padding-left:5px;
     padding-right:5px;
+    height:300px;
 }
 
 .admin-content-con header{
@@ -65,5 +66,18 @@
 .titleCol{
     max-width:20em;
     word-wrap:break-word;
+}
 
+tr:hover{
+    background-color: #f4f4f4;
+}
+
+tr th{
+    background-color: #eee;
+}
+
+.styledClass{
+    border-radius:10px;
+    -moz-border-radius:10px;
+    -webkit-border-radius:10px;
 }
