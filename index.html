@@ -23,9 +23,9 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/default.js"></script>
     <script src="js/jquery.dataTables.min.js"></script>
-    <!--<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">-->
+    <script src="js/mainPageJS.js"></script>
+    <!--<script src="js/getPlayListItems.js"></script>-->
 
-    <!--</script>-->
 
 </head>
 <body>
@@ -286,10 +286,19 @@
                 <div class="row">
                     <div class="col-md-8 dashboard-left-cell">
                         <div class="admin-content-con">
-                            <header class="clearfix">
-                                <h5 class="pull-left">Teacher</h5>
+                            <!--<header >-->
+                                <h5>
+                                    <!--<div class="col-sm-2 col-md-1">-->
+                                        <div class="pull-left">
+                                            <img class="img-responsive hidden-xs" src="https://api.fnkr.net/testimg/70x70/00CED1/FFF/?text=70x70"/>
+                                        </div>
+                                    <!--</div>-->
+                                        <div class="pull-right alert-dismissible">
+                                          <span style="font-size: 1.2em;"><b>Hiro Nakamura</b></span>
+                                        </div>
+                                </h5>
                                 <!--<a class="btn btn-xs btn-primary pull-right" href="#" role="button">Create new article</a>-->
-                            </header>
+                           <!--</header>-->
                             <!--<div style="height:100px;overflow:auto;">-->
                             <table class="table table-condensed display" id="playList" cellspacing="0" width="100%">
                                 <thead>
@@ -317,136 +326,136 @@
                                     </th>
                                 </tr>
                                 </thead>
-                                <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td class="titleCol">this is the first post of many to come. This should really be long..</td>
-                                    <td>01:20:34 h</td>
-                                    <td>
-                                        <span col-xs-6 class="pull-left text-success">1000</span>
-                                        <span col-xs-6 class="pull-right text-danger">10</span>
-                                    </td>
-                                    <td>
-                                        <span col-xs-4 class="text-danger">2.0/5</span>
-                                        <span col-xs-4 class="text-warning qualityCenter">3.0/5</span>
-                                        <span col-xs-4 class="text-success">5.0/5</span>
-                                    </td>
-                                </tr>
+                                <tbody id="playlistItems">
+                                <!--<tr>-->
+                                    <!--<td>1</td>-->
+                                    <!--<td class="titleCol">this is the first post of many to come. This should really be long..</td>-->
+                                    <!--<td>01:20:34 h</td>-->
+                                    <!--<td>-->
+                                        <!--<span col-xs-6 class="pull-left text-success">1000</span>-->
+                                        <!--<span col-xs-6 class="pull-right text-danger">10</span>-->
+                                    <!--</td>-->
+                                    <!--<td>-->
+                                        <!--<span col-xs-4 class="text-danger">2.0/5</span>-->
+                                        <!--<span col-xs-4 class="text-warning qualityCenter">3.0/5</span>-->
+                                        <!--<span col-xs-4 class="text-success">5.0/5</span>-->
+                                    <!--</td>-->
+                                <!--</tr>-->
 
-                                <tr>
-                                    <td>2</td>
-                                    <td class="titleCol">this is the first post of many to come..</td>
-                                    <td>01:20:34 h</td>
-                                    <td>
-                                        <span col-xs-6 class="pull-left text-success">20200</span>
-                                        <span col-xs-6 class="pull-right text-danger">1230</span>
-                                    </td>
-                                    <td>
-                                        <span col-xs-4 class="text-danger">2.0/5</span>
-                                        <span col-xs-4 class="text-warning qualityCenter">3.0/5</span>
-                                        <span col-xs-4 class="text-success">5.0/5</span>
-                                    </td>
-                                </tr>
+                                <!--<tr>-->
+                                    <!--<td>2</td>-->
+                                    <!--<td class="titleCol">this is the first post of many to come..</td>-->
+                                    <!--<td>01:20:34 h</td>-->
+                                    <!--<td>-->
+                                        <!--<span col-xs-6 class="pull-left text-success">20200</span>-->
+                                        <!--<span col-xs-6 class="pull-right text-danger">1230</span>-->
+                                    <!--</td>-->
+                                    <!--<td>-->
+                                        <!--<span col-xs-4 class="text-danger">2.0/5</span>-->
+                                        <!--<span col-xs-4 class="text-warning qualityCenter">3.0/5</span>-->
+                                        <!--<span col-xs-4 class="text-success">5.0/5</span>-->
+                                    <!--</td>-->
+                                <!--</tr>-->
 
-                                <tr>
-                                    <td>3</td>
-                                    <td class="titleCol">this is the first post of many to come..</td>
-                                    <td>01:20:34 h</td>
-                                    <td>
-                                        <span col-xs-6 class="pull-left text-success">10223</span>
-                                        <span col-xs-6 class="pull-right text-danger">103</span>
-                                    </td>
-                                    <td>
-                                        <span col-xs-4 class="text-danger">2.0/5</span>
-                                        <span col-xs-4 class="text-warning qualityCenter">3.0/5</span>
-                                        <span col-xs-4 class="text-success">5.0/5</span>
-                                    </td>
-                                </tr>
+                                <!--<tr>-->
+                                    <!--<td>3</td>-->
+                                    <!--<td class="titleCol">this is the first post of many to come..</td>-->
+                                    <!--<td>01:20:34 h</td>-->
+                                    <!--<td>-->
+                                        <!--<span col-xs-6 class="pull-left text-success">10223</span>-->
+                                        <!--<span col-xs-6 class="pull-right text-danger">103</span>-->
+                                    <!--</td>-->
+                                    <!--<td>-->
+                                        <!--<span col-xs-4 class="text-danger">2.0/5</span>-->
+                                        <!--<span col-xs-4 class="text-warning qualityCenter">3.0/5</span>-->
+                                        <!--<span col-xs-4 class="text-success">5.0/5</span>-->
+                                    <!--</td>-->
+                                <!--</tr>-->
 
-                                <tr>
-                                    <td>4</td>
-                                    <td class="titleCol">this is the first post of many to come..</td>
-                                    <td>01:20:34 h</td>
-                                    <td>
-                                        <span col-xs-6 class="pull-left text-success">100</span>
-                                        <span col-xs-6 class="pull-right text-danger">4</span>
-                                    </td>
-                                    <td>
-                                        <span col-xs-4 class="text-danger">2.0/5</span>
-                                        <span col-xs-4 class="text-warning qualityCenter">3.0/5</span>
-                                        <span col-xs-4 class="text-success">5.0/5</span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td class="titleCol">this is the first post of many to come..</td>
-                                    <td>01:20:34 h</td>
-                                    <td>
-                                        <span col-xs-6 class="pull-left text-success">100</span>
-                                        <span col-xs-6 class="pull-right text-danger">4</span>
-                                    </td>
-                                    <td>
-                                        <span col-xs-4 class="text-danger">2.0/5</span>
-                                        <span col-xs-4 class="text-warning qualityCenter">3.0/5</span>
-                                        <span col-xs-4 class="text-success">5.0/5</span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>6</td>
-                                    <td class="titleCol">this is the first post of many to come..</td>
-                                    <td>01:20:34 h</td>
-                                    <td>
-                                        <span col-xs-6 class="pull-left text-success">100</span>
-                                        <span col-xs-6 class="pull-right text-danger">4</span>
-                                    </td>
-                                    <td>
-                                        <span col-xs-4 class="text-danger">2.0/5</span>
-                                        <span col-xs-4 class="text-warning qualityCenter">3.0/5</span>
-                                        <span col-xs-4 class="text-success">5.0/5</span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>7</td>
-                                    <td class="titleCol">this is the first post of many to come..</td>
-                                    <td>01:20:34 h</td>
-                                    <td>
-                                        <span col-xs-6 class="pull-left text-success">100</span>
-                                        <span col-xs-6 class="pull-right text-danger">4</span>
-                                    </td>
-                                    <td>
-                                        <span col-xs-4 class="text-danger">2.0/5</span>
-                                        <span col-xs-4 class="text-warning qualityCenter">3.0/5</span>
-                                        <span col-xs-4 class="text-success">5.0/5</span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>8</td>
-                                    <td class="titleCol">this is the first post of many to come..</td>
-                                    <td>01:20:34 h</td>
-                                    <td>
-                                        <span col-xs-6 class="pull-left text-success">100</span>
-                                        <span col-xs-6 class="pull-right text-danger">4</span>
-                                    </td>
-                                    <td>
-                                        <span col-xs-4 class="text-danger">2.0/5</span>
-                                        <span col-xs-4 class="text-warning qualityCenter">3.0/5</span>
-                                        <span col-xs-4 class="text-success">5.0/5</span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>9</td>
-                                    <td class="titleCol">Ritika targaeryan is stupid..</td>
-                                    <td>01:20:34 h</td>
-                                    <td>
-                                        <span col-xs-6 class="pull-left text-success">100</span>
-                                        <span col-xs-6 class="pull-right text-danger">4</span>
-                                    </td>
-                                    <td>
-                                        <span col-xs-4 class="text-danger">2.0/5</span>
-                                        <span col-xs-4 class="text-warning qualityCenter">3.0/5</span>
-                                        <span col-xs-4 class="text-success">5.0/5</span>
-                                    </td>
-                                </tr>
+                                <!--<tr>-->
+                                    <!--<td>4</td>-->
+                                    <!--<td class="titleCol">this is the first post of many to come..</td>-->
+                                    <!--<td>01:20:34 h</td>-->
+                                    <!--<td>-->
+                                        <!--<span col-xs-6 class="pull-left text-success">100</span>-->
+                                        <!--<span col-xs-6 class="pull-right text-danger">4</span>-->
+                                    <!--</td>-->
+                                    <!--<td>-->
+                                        <!--<span col-xs-4 class="text-danger">2.0/5</span>-->
+                                        <!--<span col-xs-4 class="text-warning qualityCenter">3.0/5</span>-->
+                                        <!--<span col-xs-4 class="text-success">5.0/5</span>-->
+                                    <!--</td>-->
+                                <!--</tr>-->
+                                <!--<tr>-->
+                                    <!--<td>5</td>-->
+                                    <!--<td class="titleCol">this is the first post of many to come..</td>-->
+                                    <!--<td>01:20:34 h</td>-->
+                                    <!--<td>-->
+                                        <!--<span col-xs-6 class="pull-left text-success">100</span>-->
+                                        <!--<span col-xs-6 class="pull-right text-danger">4</span>-->
+                                    <!--</td>-->
+                                    <!--<td>-->
+                                        <!--<span col-xs-4 class="text-danger">2.0/5</span>-->
+                                        <!--<span col-xs-4 class="text-warning qualityCenter">3.0/5</span>-->
+                                        <!--<span col-xs-4 class="text-success">5.0/5</span>-->
+                                    <!--</td>-->
+                                <!--</tr>-->
+                                <!--<tr>-->
+                                    <!--<td>6</td>-->
+                                    <!--<td class="titleCol">this is the first post of many to come..</td>-->
+                                    <!--<td>01:20:34 h</td>-->
+                                    <!--<td>-->
+                                        <!--<span col-xs-6 class="pull-left text-success">100</span>-->
+                                        <!--<span col-xs-6 class="pull-right text-danger">4</span>-->
+                                    <!--</td>-->
+                                    <!--<td>-->
+                                        <!--<span col-xs-4 class="text-danger">2.0/5</span>-->
+                                        <!--<span col-xs-4 class="text-warning qualityCenter">3.0/5</span>-->
+                                        <!--<span col-xs-4 class="text-success">5.0/5</span>-->
+                                    <!--</td>-->
+                                <!--</tr>-->
+                                <!--<tr>-->
+                                    <!--<td>7</td>-->
+                                    <!--<td class="titleCol">this is the first post of many to come..</td>-->
+                                    <!--<td>01:20:34 h</td>-->
+                                    <!--<td>-->
+                                        <!--<span col-xs-6 class="pull-left text-success">100</span>-->
+                                        <!--<span col-xs-6 class="pull-right text-danger">4</span>-->
+                                    <!--</td>-->
+                                    <!--<td>-->
+                                        <!--<span col-xs-4 class="text-danger">2.0/5</span>-->
+                                        <!--<span col-xs-4 class="text-warning qualityCenter">3.0/5</span>-->
+                                        <!--<span col-xs-4 class="text-success">5.0/5</span>-->
+                                    <!--</td>-->
+                                <!--</tr>-->
+                                <!--<tr>-->
+                                    <!--<td>8</td>-->
+                                    <!--<td class="titleCol">this is the first post of many to come..</td>-->
+                                    <!--<td>01:20:34 h</td>-->
+                                    <!--<td>-->
+                                        <!--<span col-xs-6 class="pull-left text-success">100</span>-->
+                                        <!--<span col-xs-6 class="pull-right text-danger">4</span>-->
+                                    <!--</td>-->
+                                    <!--<td>-->
+                                        <!--<span col-xs-4 class="text-danger">2.0/5</span>-->
+                                        <!--<span col-xs-4 class="text-warning qualityCenter">3.0/5</span>-->
+                                        <!--<span col-xs-4 class="text-success">5.0/5</span>-->
+                                    <!--</td>-->
+                                <!--</tr>-->
+                                <!--<tr>-->
+                                    <!--<td>9</td>-->
+                                    <!--<td class="titleCol">Ritika targaeryan is stupid..</td>-->
+                                    <!--<td>01:20:34 h</td>-->
+                                    <!--<td>-->
+                                        <!--<span col-xs-6 class="pull-left text-success">100</span>-->
+                                        <!--<span col-xs-6 class="pull-right text-danger">4</span>-->
+                                    <!--</td>-->
+                                    <!--<td>-->
+                                        <!--<span col-xs-4 class="text-danger">2.0/5</span>-->
+                                        <!--<span col-xs-4 class="text-warning qualityCenter">3.0/5</span>-->
+                                        <!--<span col-xs-4 class="text-success">5.0/5</span>-->
+                                    <!--</td>-->
+                                <!--</tr>-->
 
                                 </tbody>
                             </table>
@@ -466,7 +475,7 @@
                                     <div class="days-dash pull-right">32,415</div>
                                 </div>
                             <iframe
-                                src="https://www.youtube.com/watch?v=jdqsiFw74Jk" width="200px" height=251px"
+                                src="http://www.youtube.com/embed/nIsCs9_-LP8" width=100% height=270px"
                                 frameborder="0" allowfullscreen>
                             </iframe>
                             <div class="clearfix">
@@ -510,86 +519,14 @@
 
           <div class="row">
                 <footer id="admin-footer" class="clearfix">
-                     <div class="pull-left"><b>Copyright</b>&copy; 2015</div>
-                     <div class="pull-right">admin systems</div>
+                     <div class="pull-left"><b>Copyright</b>&copy; Fope 2015</div>
+                     <div class="pull-right">All rights reserved</div>
                 </footer>
           </div>
     </div>
     </div>
 </div>
 </div>
-
-<script>
-//    Scrollbar addition section
-    if(typeof jQuery !="undefined"){
-        $(document).ready(function() {
-            $('#playList').DataTable( {
-                "scrollY":        "200px",
-                "scrollCollapse": true,
-                "paging":         false
-            } );
-        } );
-
-        //Star rating section
-        //audio
-        var $star_ratingA = $('.star-ratingA .fa');
-
-        var SetRatingStarA = function() {
-            return $star_ratingA.each(function() {
-                if (parseInt($star_ratingA.siblings('input.rating-value').val()) >= parseInt($(this).data('rating'))) {
-                    return $(this).removeClass('fa-star-o').addClass('fa-star');
-                } else {
-                    return $(this).removeClass('fa-star').addClass('fa-star-o');
-                }
-            });
-        };
-
-        $star_ratingA.on('click', function() {
-            $star_ratingA.siblings('input.rating-value').val($(this).data('rating'));
-            return SetRatingStarA();
-        });
-
-        //video
-        var $star_ratingV = $('.star-ratingV .fa');
-
-        var SetRatingStarV = function() {
-            return $star_ratingV.each(function() {
-                if (parseInt($star_ratingV.siblings('input.rating-value').val()) >= parseInt($(this).data('rating'))) {
-                    return $(this).removeClass('fa-star-o').addClass('fa-star');
-                } else {
-                    return $(this).removeClass('fa-star').addClass('fa-star-o');
-                }
-            });
-        };
-
-        $star_ratingV.on('click', function() {
-            $star_ratingV.siblings('input.rating-value').val($(this).data('rating'));
-            return SetRatingStarV();
-        });
-
-        //content
-        var $star_ratingC = $('.star-ratingC .fa');
-
-        var SetRatingStarC = function() {
-            return $star_ratingC.each(function() {
-                if (parseInt($star_ratingC.siblings('input.rating-value').val()) >= parseInt($(this).data('rating'))) {
-                    return $(this).removeClass('fa-star-o').addClass('fa-star');
-                } else {
-                    return $(this).removeClass('fa-star').addClass('fa-star-o');
-                }
-            });
-        };
-
-        $star_ratingC.on('click', function() {
-            $star_ratingC.siblings('input.rating-value').val($(this).data('rating'));
-            return SetRatingStarC();
-        });
-
-
-
-        //SetRatingStar();
-    }
-</script>
 
 </body>
 </html>
