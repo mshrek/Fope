@@ -11,15 +11,21 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/default.css" rel="stylesheet" type="text/css">
     <link href="css/index.css" rel="stylesheet" type="text/css">
+    <link href="css/font-awesome.css" rel="stylesheet" type="text/css">
     <link href="css/jquery.dataTables.min.css" rel="stylesheet" type="text/css">
 
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
+
+    </script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
     <script src="js/default.js"></script>
     <script src="js/jquery.dataTables.min.js"></script>
+    <!--<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">-->
+
+    <!--</script>-->
 
 </head>
 <body>
@@ -456,17 +462,47 @@
                                 </h5>
                             </header>
                                 <div class="comment-head-dash clearfix">
-                                    <div class="commenter-name-dash pull-left">srikanth mannepalle</div>
-                                    <div class="days-dash pull-right">2 days ago</div>
+                                    <div class="commenter-name-dash pull-left">Viewer hits</div>
+                                    <div class="days-dash pull-right">32,415</div>
                                 </div>
-                            <p class="comment-dash">
-                                lorem ipsum lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum
-                                lorem ipsumlorem ipsumlorem ipsum lorem ipsumlorem ipsumlorem ipsumlorem ipsum
-                            </p>
-                            <small class="comment-date-dash">Today 5:10pm 25-12-2015</small>
-                            <hr>
+                            <iframe
+                                src="https://www.youtube.com/watch?v=jdqsiFw74Jk" width="200px" height=251px"
+                                frameborder="0" allowfullscreen>
+                            </iframe>
                             <div class="clearfix">
-                                <a href="#" class="pull-right text-link">view all comments</a>
+                                <br/>
+                                <!--<a href="#" class="pull-right text-info">Rate your experience</a>-->
+                                <div class="clearfix"></div>
+                                <div id="feedback">
+                                    <span class="col-xs-4">Audio</span>
+                                    <span class="col-xs-4">Video</span>
+                                    <span class="col-xs-4">Content</span>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="star-ratingA  col-xs-4" id="audioRating">
+                                    <span class="fa fa-star-o" data-rating="1"></span>
+                                    <span class="fa fa-star-o" data-rating="2"></span>
+                                    <span class="fa fa-star-o" data-rating="3"></span>
+                                    <span class="fa fa-star-o" data-rating="4"></span>
+                                    <span class="fa fa-star-o" data-rating="5"></span>
+                                    <input type="hidden" name="whatever" class="rating-value" value="3">
+                                </div>
+                                <div class="star-ratingV col-xs-4" id="videoRating">
+                                    <span class="fa fa-star-o" data-rating="1"></span>
+                                    <span class="fa fa-star-o" data-rating="2"></span>
+                                    <span class="fa fa-star-o" data-rating="3"></span>
+                                    <span class="fa fa-star-o" data-rating="4"></span>
+                                    <span class="fa fa-star-o" data-rating="5"></span>
+                                    <input type="hidden" name="whatever" class="rating-value" value="3">
+                                </div>
+                                <div class="star-ratingC col-xs-4" id="contentRating">
+                                    <span class="fa fa-star-o" data-rating="1"></span>
+                                    <span class="fa fa-star-o" data-rating="2"></span>
+                                    <span class="fa fa-star-o" data-rating="3"></span>
+                                    <span class="fa fa-star-o" data-rating="4"></span>
+                                    <span class="fa fa-star-o" data-rating="5"></span>
+                                    <input type="hidden" name="whatever" class="rating-value" value="3">
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -484,7 +520,8 @@
 </div>
 
 <script>
-    if(jQuery){
+//    Scrollbar addition section
+    if(typeof jQuery !="undefined"){
         $(document).ready(function() {
             $('#playList').DataTable( {
                 "scrollY":        "200px",
@@ -492,7 +529,67 @@
                 "paging":         false
             } );
         } );
+
+        //Star rating section
+        //audio
+        var $star_ratingA = $('.star-ratingA .fa');
+
+        var SetRatingStarA = function() {
+            return $star_ratingA.each(function() {
+                if (parseInt($star_ratingA.siblings('input.rating-value').val()) >= parseInt($(this).data('rating'))) {
+                    return $(this).removeClass('fa-star-o').addClass('fa-star');
+                } else {
+                    return $(this).removeClass('fa-star').addClass('fa-star-o');
+                }
+            });
+        };
+
+        $star_ratingA.on('click', function() {
+            $star_ratingA.siblings('input.rating-value').val($(this).data('rating'));
+            return SetRatingStarA();
+        });
+
+        //video
+        var $star_ratingV = $('.star-ratingV .fa');
+
+        var SetRatingStarV = function() {
+            return $star_ratingV.each(function() {
+                if (parseInt($star_ratingV.siblings('input.rating-value').val()) >= parseInt($(this).data('rating'))) {
+                    return $(this).removeClass('fa-star-o').addClass('fa-star');
+                } else {
+                    return $(this).removeClass('fa-star').addClass('fa-star-o');
+                }
+            });
+        };
+
+        $star_ratingV.on('click', function() {
+            $star_ratingV.siblings('input.rating-value').val($(this).data('rating'));
+            return SetRatingStarV();
+        });
+
+        //content
+        var $star_ratingC = $('.star-ratingC .fa');
+
+        var SetRatingStarC = function() {
+            return $star_ratingC.each(function() {
+                if (parseInt($star_ratingC.siblings('input.rating-value').val()) >= parseInt($(this).data('rating'))) {
+                    return $(this).removeClass('fa-star-o').addClass('fa-star');
+                } else {
+                    return $(this).removeClass('fa-star').addClass('fa-star-o');
+                }
+            });
+        };
+
+        $star_ratingC.on('click', function() {
+            $star_ratingC.siblings('input.rating-value').val($(this).data('rating'));
+            return SetRatingStarC();
+        });
+
+
+
+        //SetRatingStar();
     }
 </script>
+
 </body>
 </html>

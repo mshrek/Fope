@@ -69,15 +69,38 @@
 }
 
 tr:hover{
-    background-color: #f4f4f4;
+    background-color: #e6e9ed;
 }
 
 tr th{
-    background-color: #eee;
+    background-color: #e6e9ed;
 }
 
 .styledClass{
     border-radius:10px;
     -moz-border-radius:10px;
     -webkit-border-radius:10px;
+}
+
+.star-ratingA {
+    line-height:15px;
+    font-size:1.1em;
+    cursor: pointer;
+}
+
+.star-ratingV {
+    line-height:15px;
+    font-size:1.1em;
+    cursor: pointer;
+}
+
+.star-ratingC {
+    line-height:15px;
+    font-size:1.1em;
+    cursor: pointer;
+}
+
+#feedback{
+    margin: 0px;
+    padding: 0px;
 }
