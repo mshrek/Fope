@@ -64,7 +64,7 @@
 }
 
 .titleCol{
-    max-width:20em;
+    max-width:50em;
     word-wrap:break-word;
 }
 
@@ -103,4 +103,8 @@ tr th{
 #feedback{
     margin: 0px;
     padding: 0px;
+}
+
+.glyphicon-alert{
+    padding-left:25px;
 }
