@@ -69,22 +69,7 @@ if (typeof jQuery == "undefined"){
                     comments = item.statistics.commentCount;
                     viewcount = item.statistics.viewCount;
 
-
-                    eachVideoViewCount = viewcount;
-                    output = '<tr><td data-sort-value=' + index + '>' + index + '</td><td class="titleCol">' + vidTitle + '</td><td>' + duration.split("PT")[1] + '</td><td>' +
-                        '<span col-xs-6 class="pull-left text-success">' + likes + '</span>' +
-                        '<span col-xs-6 class="pull-right text-danger">' + dislikes + '</span>' +
-                        '</td><td><span col-xs-4 class="text-danger" style="padding-left:25px;">2.0/5</span>' +
-                        '<span col-xs-4 class="text-warning qualityCenter">3.0/5</span>' +
-                        '<span col-xs-4 class="text-success">5.0/5</span>' +
-                        '<span class="glyphicon glyphicon-alert" aria-hidden="true"></span></td>' +
-                        '</tr>';
-
                     postParams(vidTitle, duration, likes, dislikes, viewcount, comments);
-                    //Append to results listStyleType
-                    $('#playlistItems').append(output);
-                    $("#playList").tablesorter({sortList: [[0, 0]]});
-
                 })
             }
         );

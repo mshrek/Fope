@@ -325,68 +325,16 @@
                                     </th>
                                     <th>
                                         <div class="pull-right">
-                                        <a class="label label-success " href="#" role="button">audio</a>
-                                        <a class="label label-success " href="#" role="button">video</a>
-                                        <a class="label label-success " href="#" role="button">content</a>
-                                        <a class="label label-warning " href="#" role="button">Report broken links</a>
+                                            <a class="label label-success " href="#" role="button">audio</a>
+                                            <a class="label label-success " href="#" role="button">video</a>
+                                            <a class="label label-success " href="#" role="button">content</a>
+                                            <a class="label label-warning " href="#" role="button">Report broken links</a>
                                         </div>
                                     </th>
                                 </tr>
                                 </thead>
                                 <tbody id="playlistItems">
-                                   <?php include("createTableOutput.php"); ?>
-                                   <!--<?php-->
-
-                                   <!--$servername = "127.0.0.1";-->
-                                   <!--$username = "root";-->
-                                   <!--$password = "MyNewPass";-->
-                                   <!--$dbname ="Playlist";-->
-                                   <!--$conn = new mysqli($servername, $username, $password,$dbname);-->
-                                   <!--if ($conn->connect_error) {-->
-                                   <!--die("Connection failed: " . $conn->connect_error);-->
-                                   <!--}-->
-                                   <!--else {-->
-                                   <!--$sqlquery ="SELECT id,title,duration,likes,dislikes,audiorating,videorating,contentrating FROM playlist1;";-->
-                                   <!--$results=$conn->query($sqlquery);-->
-
-
-                                   <!--if ($results->num_rows > 0) {-->
-                                   <!--while ($row = $results->fetch_assoc()) {-->
-
-                                   <!--echo "<tr>";-->
-                                       <!--echo "<td data-sort-value='" . $row["id"] . "'>" . $row["id"] . "</td>";-->
-                                       <!--echo "<td class='titleCol'>" . $row["title"] . "</td>";-->
-                                       <!--echo "<td>" . $row["duration"] . "</td>";-->
-                                       <!--echo "<td>";-->
-                                           <!--echo "<span col-xs-6 class='pull-left text-success'>" . $row["likes"] . "</span>";-->
-                                           <!--echo "<span col-xs-6 class='pull-right text-danger'>" . $row["dislikes"] . "</span>";-->
-                                           <!--echo "</td>";-->
-                                       <!--echo "<td>";-->
-                                           <!--echo "<span col-xs-4 class='text-danger' style='padding-left:25px;'>" . $row["audiorating"] . "</span>";-->
-                                           <!--echo "<span col-xs-4 class='text-warning qualityCenter'>" . $row["videorating"] . "</span>";-->
-                                           <!--echo "<span col-xs-4 class='text-success'>" . $row["contentrating"] . "</span>";-->
-                                           <!--echo "<span class='glyphicon glyphicon-alert' aria-hidden='true'></span>";-->
-                                           <!--echo "</td>";-->
-                                       <!--echo "</tr>";-->
-
-                                   <!--}-->
-                                   <!--}-->
-                                   <!--else{-->
-                                   <!--echo "<tr>";-->
-                                       <!--echo "<td>NA</td>";-->
-                                       <!--echo "<td>NA</td>";-->
-                                       <!--echo "<td>NA</td>";-->
-                                       <!--echo "<td>NA</td>";-->
-                                       <!--echo "<td>NA</td>";-->
-                                       <!--echo "<td>NA</td>";-->
-                                       <!--echo "<td>NA</td>";-->
-                                       <!--echo "</tr>";-->
-                                   <!--}-->
-
-                                   <!--}-->
-                                   <!--$conn->close();-->
-                                   <!--?>-->
-
+                                     <?php include("createTableOutput.php"); ?>
                                 </tbody>
                             </table>
 
@@ -405,8 +353,8 @@
                                 <div class="days-dash pull-right" id="viewcount"></div>
                             </div>
                             <iframe
-                                    src="http://www.youtube.com/embed/nIsCs9_-LP8" width=100% height=270px"
-                                    frameborder="0" allowfullscreen>
+                                src="http://www.youtube.com/embed/nIsCs9_-LP8" width=100% height=270px"
+                                frameborder="0" allowfullscreen>
                             </iframe>
                             <div class="clearfix">
                                 <br/>
