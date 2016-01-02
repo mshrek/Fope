@@ -62,6 +62,15 @@ if (typeof jQuery == "undefined") {
                 return SetRatingStarC();
             });
 
+        //Add scrollbar
+        $('#playList').DataTable({
+            select: {
+                style: 'os'
+            },
+            "scrollY": "200px",
+            "scrollCollapse": true,
+            "paging": true
+        });
         }
     );
 }

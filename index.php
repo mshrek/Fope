@@ -13,10 +13,20 @@
     <link href="css/index.css" rel="stylesheet" type="text/css">
     <link href="css/font-awesome.css" rel="stylesheet" type="text/css">
     <link href="css/jquery.dataTables.min.css" rel="stylesheet" type="text/css">
+    <!--    added for bootstrap styling-->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/s/bs/dt-1.10.10,se-1.1.0/datatables.min.css"/>
 
+
+
+
+
+
+    <!--    added for bootstrap styling-->
+    <script type="text/javascript" src="https://cdn.datatables.net/s/bs/dt-1.10.10,se-1.1.0/datatables.min.js"></script>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
+
 
     </script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
@@ -25,6 +35,7 @@
     <script src="js/jquery.dataTables.min.js"></script>
     <script src="js/mainPageJS.js"></script>
     <script src="js/jquery.tablesorter.min.js"></script>
+
 
 
 
@@ -291,7 +302,7 @@
                             <h5>
                                 <!--<div class="col-sm-2 col-md-1">-->
                                 <div class="pull-left">
-                                    <img class="img-responsive hidden-xs" src="https://api.fnkr.net/testimg/70x70/00CED1/FFF/?text=70x70"/>
+                                    <img class="img-circle hidden-xs" src="https://api.fnkr.net/testimg/70x70/00CED1/FFF/?text=70x70"/>
                                 </div>
                                 <!--</div>-->
                                 <div class="pull-right alert-dismissible">
@@ -334,7 +345,7 @@
                                 </tr>
                                 </thead>
                                 <tbody id="playlistItems">
-                                     <?php include("createTableOutput.php"); ?>
+                                <?php include("createTableOutput.php"); ?>
                                 </tbody>
                             </table>
 
@@ -353,7 +364,7 @@
                                 <div class="days-dash pull-right" id="viewcount"></div>
                             </div>
                             <iframe
-                                src="http://www.youtube.com/embed/nIsCs9_-LP8" width=100% height=270px"
+                                src="http://www.youtube.com/embed/nIsCs9_-LP8" width=100% height=289px"
                                 frameborder="0" allowfullscreen>
                             </iframe>
                             <div class="clearfix">

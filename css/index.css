@@ -84,19 +84,19 @@ tr th{
 
 .star-ratingA {
     line-height:15px;
-    font-size:1.1em;
+    font-size:1.0em;
     cursor: pointer;
 }
 
 .star-ratingV {
     line-height:15px;
-    font-size:1.1em;
+    font-size:1.0em;
     cursor: pointer;
 }
 
 .star-ratingC {
     line-height:15px;
-    font-size:1.1em;
+    font-size:1.0em;
     cursor: pointer;
 }
 
