@@ -62,15 +62,55 @@ if (typeof jQuery == "undefined") {
                 return SetRatingStarC();
             });
 
-        //Add scrollbar
-        $('#playList').DataTable({
-            select: {
-                style: 'os'
-            },
-            "scrollY": "200px",
-            "scrollCollapse": true,
-            "paging": true
-        });
-        }
-    );
-}
+            //Add scrollbar
+            $('#playList').DataTable({
+                select: {
+                    style: 'os'
+                },
+                "scrollY": "200px",
+                "scrollCollapse": true,
+                "paging": true
+            });
+
+            $('.sendIdOnClick').on('click',function(){
+                var clickedId = $(this).closest('tr').find('td:first').text();
+                //alert("id clicked ="+clickedId);
+                fetchfromMysqlDatabase(clickedId);
+            });
+
+
+            //onclick event , sends selected id of the row to the fetchvideourl.php script
+            function fetchfromMysqlDatabase(onClickId) {
+                $.ajax({
+                    type: "POST",
+                    dataType: "html",
+                    data: {"id": onClickId},
+                    url: "fetchVideoURL.php",
+                    cache: false,
+                    beforeSend: function () {
+                        $('#videoPreview').html('<iframe src="http://www.youtube.com/embed/" width="100%" height="289px" frameborder="0" allowfullscreen></iframe>');
+                        //alert(onClickId);
+                    },
+                    success: function (htmldata) {
+                        $('#videoPreview').html(htmldata);
+                    }
+                });
+                $.ajax({
+                    type: "POST",
+                    dataType: "html",
+                    data: {"id": onClickId},
+                    url: "rightDashboardStats.php",
+                    cache: false,
+                    beforeSend: function () {
+                        $('#viewcount').html('NA');
+                        //alert(onClickId);
+                    },
+                    success: function (htmldata) {
+                        $('#viewcount').html(htmldata);
+                    }
+                });
+            }
+
+        }//end of ready function
+    );//end of ready function
+}//end of else

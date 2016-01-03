@@ -33,8 +33,9 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/default.js"></script>
     <script src="js/jquery.dataTables.min.js"></script>
-    <script src="js/mainPageJS.js"></script>
     <script src="js/jquery.tablesorter.min.js"></script>
+    <script src="js/loadYoutubeData.js"></script>
+    <script src="js/mainPageJS.js"></script>
 
 
 
@@ -299,17 +300,15 @@
                     <div class="col-md-8 dashboard-left-cell">
                         <div class="admin-content-con">
                             <!--<header >-->
-                            <h5>
-                                <!--<div class="col-sm-2 col-md-1">-->
-                                <div class="pull-left">
-                                    <img class="img-circle hidden-xs" src="https://api.fnkr.net/testimg/70x70/00CED1/FFF/?text=70x70"/>
-                                </div>
-                                <!--</div>-->
-                                <div class="pull-right alert-dismissible">
-                                    <span style="font-size: 1.2em;"><b>Hiro Nakamura</b></span>
-                                </div>
-                            </h5>
-
+<!--                            <h5>-->
+<!--                                <div class="pull-left">-->
+<!--                                    <img class="img-circle hidden-xs" src="https://api.fnkr.net/testimg/70x70/00CED1/FFF/?text=70x70"/>-->
+<!--                                </div>-->
+<!--                                <div class="pull-right alert-dismissible">-->
+<!--                                    <span style="font-size: 1.2em;"><b>Hiro Nakamura</b></span>-->
+<!--                                </div>-->
+<!--                            </h5>-->
+                            <?php include("leftDashboardHeader.php"); ?>
                             <table class="table table-condensed display tablesorter" id="playList" cellspacing="0" width="100%">
                                 <thead>
                                 <tr>
@@ -336,10 +335,10 @@
                                     </th>
                                     <th>
                                         <div class="pull-right">
-                                            <a class="label label-success " href="#" role="button">audio</a>
-                                            <a class="label label-success " href="#" role="button">video</a>
-                                            <a class="label label-success " href="#" role="button">content</a>
-                                            <a class="label label-warning " href="#" role="button">Report broken links</a>
+                                            <span class="label label-success" role="button" style='padding-right:10px;'>audio</span>
+                                            <span class="label label-success " role="button">video</span>
+                                            <span class="label label-success " role="button">content</span>
+                                            <span class="label label-warning"  role="button">Report broken</span>
                                         </div>
                                     </th>
                                 </tr>
@@ -352,24 +351,29 @@
                         </div>
                     </div>
 
+<!--                    Below portion can be put in rightDashboardStats.php-->
                     <div class="col-md-4 dashboard-right-cell">
                         <div class="admin-content-con clearfix">
                             <header>
                                 <h5>
                                     Video
+                                    <span class="glyphicon glyphicon-heart-empty pull-right"></span>
                                 </h5>
                             </header>
                             <div class="comment-head-dash clearfix">
                                 <div class="commenter-name-dash pull-left">Viewer hits</div>
-                                <div class="days-dash pull-right" id="viewcount"></div>
+                                <div class="days-dash pull-right" id="viewcount">
+                                    <?php include("rightDashboardStats.php"); ?>
+                                </div>
                             </div>
-                            <iframe
-                                src="http://www.youtube.com/embed/nIsCs9_-LP8" width=100% height=289px"
-                                frameborder="0" allowfullscreen>
-                            </iframe>
+                            <div id="videoPreview">
+<!--                            <iframe-->
+<!--                                src="http://www.youtube.com/embed/nIsCs9_-LP8" width=100% height=289px"-->
+<!--                                frameborder="0" allowfullscreen>-->
+<!--                            </iframe>-->
+                            </div>
                             <div class="clearfix">
                                 <br/>
-                                <!--<a href="#" class="pull-right text-info">Rate your experience</a>-->
                                 <div class="clearfix"></div>
                                 <div id="feedback">
                                     <span class="col-xs-4">Audio</span>
@@ -404,6 +408,8 @@
                             </div>
                         </div>
                     </div>
+<!--                    Till above portion can be put in rightDashboardStats.php-->
+
                 </div>
 
                 <div class="row">

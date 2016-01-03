@@ -69,7 +69,7 @@
 }
 
 tr:hover{
-    background-color: #e6e9ed;
+    background-color: #def7f9 !important;
 }
 
 tr th{
@@ -107,4 +107,8 @@ tr th{
 
 .glyphicon-alert{
     padding-left:25px;
+}
+
+.glyphicon-heart-empty {
+    font-size: 1.3em;
 }

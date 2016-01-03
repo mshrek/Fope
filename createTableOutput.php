@@ -18,7 +18,7 @@ else {
     if ($results->num_rows > 0) {
         while ($row = $results->fetch_assoc()) {
 
-            echo "<tr>";
+            echo "<tr class='sendIdOnClick'>";
             echo "<td data-sort-value='" . $row["id"] . "'>" . $row["id"] . "</td>";
             echo "<td class='titleCol col-xs-3'>" . $row["title"] . "</td>";
             echo "<td>" . $row["duration"] . "</td>";
@@ -27,9 +27,9 @@ else {
             echo "<span col-xs-6 class='pull-right text-danger'>" . $row["dislikes"] . "</span>";
             echo "</td>";
             echo "<td>";
-            echo "<span col-xs-4 class='text-danger col-xs-offset-2  col-xs-2' style='padding-left:40px;'>" . $row["audiorating"] . "</span>";
-            echo "<span col-xs-4 class='text-warning qualityCenter col-xs-2' style='padding-left:30px;'>" . $row["videorating"] . "</span>";
-            echo "<span col-xs-4 class='text-success col-xs-2' style='padding-left:20px;'>" . $row["contentrating"] . "</span>";
+            echo "<span col-xs-4 class='text-danger col-xs-offset-2  col-xs-2' style='padding-right:10px;'>" . $row["audiorating"] . "</span>";
+            echo "<span col-xs-4 class='text-warning qualityCenter col-xs-2' style='padding-left:15px;'>" . $row["videorating"] . "</span>";
+            echo "<span col-xs-4 class='text-success col-xs-2' style='padding-left:10px;'>" . $row["contentrating"] . "</span>";
             echo "<span class='glyphicon glyphicon-alert col-xs-2' aria-hidden='true'></span>";
             echo "</td>";
             echo "</tr>";

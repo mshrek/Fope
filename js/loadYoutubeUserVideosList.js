@@ -6,14 +6,13 @@ if (typeof jQuery == "undefined"){
     alert('Jquery is not loaded');
 } else {
     $(document).ready(function () {
-       // alert('dom is ready now...');
+        alert('dom is ready now...');
         //variables for DB insertion
         var youtubekey;
         var authname;
         var authid;
-        var playlistname;
+        var playlistid;
         var maxrecords;
-
 
         //variables for making call to youtube api
         var vidTitle;
@@ -21,24 +20,21 @@ if (typeof jQuery == "undefined"){
         var likes;
         var dislikes;
         var comments;
-        var authorname;
-        var authorid;
         var viewcount;
-        var gplusid;
         var imageURL;
-        var videolink;
 
         $('#submitbtn').click(function () {
+            alert('sdsd');
             youtubekey=$('#keyid').val();
-            authorname=$('#authname').val();
-            authorid=$('#authid').val();
-            playlistname=$('#playlistName').val();
+            authname=$('#authname').val();
+            authid=$('#authid').val();
+            playlistid=$('#playlistid').val();
             maxrecords=$('#maxrecords').val();
 
 
 
             //section to retrieve playlist Items
-            var channelName = authorname;
+            var channelName = authname;
             var index = 1;
 
 
@@ -50,56 +46,23 @@ if (typeof jQuery == "undefined"){
                 function (data) {
                     $.each(data.items, function (i, item) {
                         console.log(item);
-                        channelid= item.id;
-                        gplusid=item.contentDetails.googlePlusUserId;
-                        getImageURL(gplusid);
-                        getPlayListId(channelid);
+                        pid = item.contentDetails.relatedPlaylists.uploads;
+                        getVids(pid);
+                        console.log("Play list id now is ="+pid);
+                        imageURL=item.brandingSettings.image.bannerMobileLowImageUrl;
+                        //console.log(imageURL);
+                        //alert("image url is ="+imageURL);
                     })
                 }
             );
 
-            function getImageURL(_gplusid) {
-                $.get("https://www.googleapis.com/plus/v1/people/"+_gplusid+"?fields=image"+"&key="+youtubekey,
-                    function (data) {
-                        imageURL=data.image.url;
-                    });
-            }
-
-
-
-
-            function getPlayListId(_channelId) {
-
-                $.get("https://www.googleapis.com/youtube/v3/playlists", {
-                        part: 'snippet',
-                        maxResults: maxrecords,
-                        channelId: _channelId,
-                        key: youtubekey
-                    },
-
-                    function (data) {
-
-                        $.each(data.items, function (i, item) {
-                            playListName = item.snippet.title;
-                            playListid = item.id;
-                            if(playListName==playlistname) {
-                                console.log(item);
-                                console.log(playlistname+' play list found !');
-                                getPlayListItems(playListid);
-                            }
-                        })
-                    }
-                );
-            }
-
-            function getPlayListItems(_playListid) {
+            function getVids(pid) {
 
                 $.get("https://www.googleapis.com/youtube/v3/playlistItems", {
                         part: 'snippet',
-                        maxResults: maxrecords,
-                        playlistId: _playListid,
-                        pageToken:'',
-                        key: youtubekey
+                        maxResults: 50,
+                        playlistId: pid,
+                        key: 'AIzaSyAYVmp1339Gvva8j9Kc5HebekzTS2cLRa4'
                     },
 
                     function (data) {
@@ -115,14 +78,13 @@ if (typeof jQuery == "undefined"){
             }
 
 
-
             //videoDuration
             function getStats(videoID, index) {
                 var output = '';
 
                 $.get("https://www.googleapis.com/youtube/v3/videos?id=" + videoID, {
                         part: 'snippet,contentDetails,statistics,status',
-                        key: youtubekey
+                        key: 'AIzaSyAYVmp1339Gvva8j9Kc5HebekzTS2cLRa4'
                     },
                     function (data) {
                         $.each(data.items, function (i, item) {
@@ -131,28 +93,23 @@ if (typeof jQuery == "undefined"){
                             duration = item.contentDetails.duration;
                             likes = item.statistics.likeCount;
                             dislikes = item.statistics.dislikeCount;
-                            videolink=item.id;
                             comments = item.statistics.commentCount;
                             viewcount = item.statistics.viewCount;
-                            console.log("Next page token="+item.nextPageToken);
-                            postParams(vidTitle, duration, likes, dislikes,authorname,authorid,viewcount,videolink,comments);
+                            postParams(vidTitle, duration, likes, dislikes, viewcount, comments);
                         })
                     }
                 );
 
 
                 //function to send data into sql
-                function postParams(vidTitle, duration, likes, dislikes,authorname,authorid,viewcount,videolink,comments) {
+                function postParams(vidTitle, duration, likes, dislikes, viewcount, comments) {
                     $.post("insertPlayListInfo.php", {
                             ptitle: "\'" + vidTitle + "\'",
                             pduration: "\'" + duration + "\'",
                             plikes: likes,
                             pdislikes: dislikes,
-                            pauthorname:authorname,
-                            pauthorid:authorid,
                             pviewcount: viewcount,
                             pcommentscount: comments,
-                            pvideolink :videolink,
                             pimageURL: imageURL
                         }, function (data) {
                             console.log("value of data=" + data);
