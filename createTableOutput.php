@@ -12,14 +12,13 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 else {
-    $sqlquery ="SELECT id,title,duration,likes,dislikes,audiorating,videorating,contentrating FROM playlist1;";
+    $sqlquery ="SELECT sorted_id,title,duration,likes,dislikes,audiorating,videorating,contentrating FROM playlist1;";
     $results=$conn->query($sqlquery);
 
     if ($results->num_rows > 0) {
         while ($row = $results->fetch_assoc()) {
-
             echo "<tr class='sendIdOnClick'>";
-            echo "<td data-sort-value='" . $row["id"] . "'>" . $row["id"] . "</td>";
+            echo "<td data-sort-value='" . $row['sorted_id'] . "'>" . $row['sorted_id'] . "</td>";
             echo "<td class='titleCol col-xs-3'>" . $row["title"] . "</td>";
             echo "<td>" . $row["duration"] . "</td>";
             echo "<td>";
@@ -33,7 +32,6 @@ else {
             echo "<span class='glyphicon glyphicon-alert col-xs-2' aria-hidden='true'></span>";
             echo "</td>";
             echo "</tr>";
-
         }
     }
     else{

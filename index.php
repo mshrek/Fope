@@ -309,7 +309,7 @@
 <!--                                </div>-->
 <!--                            </h5>-->
                             <?php include("leftDashboardHeader.php"); ?>
-                            <table class="table table-condensed display tablesorter" id="playList" cellspacing="0" width="100%">
+                            <table class="table table-condensed display tablesorter" id="playList" cellspacing="0" width="100%" id="leftdashboardtable">
                                 <thead>
                                 <tr>
                                     <th>#</th>

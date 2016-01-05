@@ -27,8 +27,12 @@ if (typeof jQuery == "undefined"){
         var gplusid;
         var imageURL;
         var videolink;
+        var publishedAt;
+        var gexecutionComplete;
 
         $('#submitbtn').click(function () {
+            var executionComplete=false;
+
             youtubekey=$('#keyid').val();
             authorname=$('#authname').val();
             authorid=$('#authid').val();
@@ -85,7 +89,7 @@ if (typeof jQuery == "undefined"){
                             if(playListName==playlistname) {
                                 console.log(item);
                                 console.log(playlistname+' play list found !');
-                                getPlayListItems(playListid);
+                                getPlayListItems(playListid,reOrder);
                             }
                         })
                     }
@@ -110,10 +114,11 @@ if (typeof jQuery == "undefined"){
                             getStats(videoId, index);
                             index += 1;
                         })
+
+
                     }
                 );
             }
-
 
 
             //videoDuration
@@ -131,18 +136,19 @@ if (typeof jQuery == "undefined"){
                             duration = item.contentDetails.duration;
                             likes = item.statistics.likeCount;
                             dislikes = item.statistics.dislikeCount;
-                            videolink=item.id;
+                            videolink = item.id;
                             comments = item.statistics.commentCount;
                             viewcount = item.statistics.viewCount;
-                            console.log("Next page token="+item.nextPageToken);
-                            postParams(vidTitle, duration, likes, dislikes,authorname,authorid,viewcount,videolink,comments);
+                            publishedAt = item.snippet.publishedAt;
+                            console.log("Next page token=" + item.nextPageToken);
+                            postParams(vidTitle, duration, likes, dislikes, authorname, authorid, viewcount, videolink, comments, publishedAt);
                         })
                     }
                 );
-
+            }
 
                 //function to send data into sql
-                function postParams(vidTitle, duration, likes, dislikes,authorname,authorid,viewcount,videolink,comments) {
+                function postParams(vidTitle, duration, likes, dislikes,authorname,authorid,viewcount,videolink,comments,publishedAt) {
                     $.post("insertPlayListInfo.php", {
                             ptitle: "\'" + vidTitle + "\'",
                             pduration: "\'" + duration + "\'",
@@ -153,10 +159,11 @@ if (typeof jQuery == "undefined"){
                             pviewcount: viewcount,
                             pcommentscount: comments,
                             pvideolink :videolink,
-                            pimageURL: imageURL
+                            pimageURL: imageURL,
+                            ppublishedAt: publishedAt
                         }, function (data) {
                             console.log("value of data=" + data);
-                            if (data != null) {
+                            if (data) {
                                 console.log("Insertion of record " + vidTitle + " was successfull");
                                 // console.log(imageURL);
                             }
@@ -166,10 +173,21 @@ if (typeof jQuery == "undefined"){
                         }
                     );
                 }
-            }
 
+            delayedAlert();
         });
 
+        function delayedAlert() {
+            timeoutID = window.setTimeout(reOrder, 10000);
+        }
+
+        function reOrder() {
+
+                alert("Reordering to be done..");
+                $.get("reOrderIndexes.php", function (data) {
+                    alert("Reordering done successfully");
+                });
+        }
     });
 }
 

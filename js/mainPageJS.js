@@ -72,9 +72,9 @@ if (typeof jQuery == "undefined") {
                 "paging": true
             });
 
-            $('.sendIdOnClick').on('click',function(){
+            //assigns id on row click
+            $('body').delegate('.sendIdOnClick', 'click', function () {
                 var clickedId = $(this).closest('tr').find('td:first').text();
-                //alert("id clicked ="+clickedId);
                 fetchfromMysqlDatabase(clickedId);
             });
 
