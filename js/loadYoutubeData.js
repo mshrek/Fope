@@ -149,7 +149,7 @@ if (typeof jQuery == "undefined"){
 
                 //function to send data into sql
                 function postParams(vidTitle, duration, likes, dislikes,authorname,authorid,viewcount,videolink,comments,publishedAt) {
-                    $.post("insertPlayListInfo.php", {
+                    $.post("../php/insertPlayListInfo.php", {
                             ptitle: "\'" + vidTitle + "\'",
                             pduration: "\'" + duration + "\'",
                             plikes: likes,
@@ -184,7 +184,7 @@ if (typeof jQuery == "undefined"){
         function reOrder() {
 
                 alert("Reordering to be done..");
-                $.get("reOrderIndexes.php", function (data) {
+                $.get("../php/reOrderIndexes.php", function (data) {
                     alert("Reordering done successfully");
                 });
         }

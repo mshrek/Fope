@@ -8,11 +8,11 @@
     <title>User Profile</title>
 
     <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/default.css" rel="stylesheet" type="text/css">
-    <link href="css/index.css" rel="stylesheet" type="text/css">
-    <link href="css/font-awesome.css" rel="stylesheet" type="text/css">
-    <link href="css/jquery.dataTables.min.css" rel="stylesheet" type="text/css">
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/default.css" rel="stylesheet" type="text/css">
+    <link href="../css/index.css" rel="stylesheet" type="text/css">
+    <link href="../css/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href="../css/jquery.dataTables.min.css" rel="stylesheet" type="text/css">
     <!--    added for bootstrap styling-->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/s/bs/dt-1.10.10,se-1.1.0/datatables.min.css"/>
 
@@ -30,12 +30,12 @@
 
     </script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/default.js"></script>
-    <script src="js/jquery.dataTables.min.js"></script>
-    <script src="js/jquery.tablesorter.min.js"></script>
-    <script src="js/loadYoutubeData.js"></script>
-    <script src="js/mainPageJS.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/default.js"></script>
+    <script src="../js/jquery.dataTables.min.js"></script>
+    <script src="../js/jquery.tablesorter.min.js"></script>
+    <script src="../js/loadYoutubeData.js"></script>
+    <script src="../js/mainPageJS.js"></script>
 
 
 
@@ -299,15 +299,6 @@
                 <div class="row">
                     <div class="col-md-8 dashboard-left-cell">
                         <div class="admin-content-con">
-                            <!--<header >-->
-<!--                            <h5>-->
-<!--                                <div class="pull-left">-->
-<!--                                    <img class="img-circle hidden-xs" src="https://api.fnkr.net/testimg/70x70/00CED1/FFF/?text=70x70"/>-->
-<!--                                </div>-->
-<!--                                <div class="pull-right alert-dismissible">-->
-<!--                                    <span style="font-size: 1.2em;"><b>Hiro Nakamura</b></span>-->
-<!--                                </div>-->
-<!--                            </h5>-->
                             <?php include("leftDashboardHeader.php"); ?>
                             <table class="table table-condensed display tablesorter" id="playList" cellspacing="0" width="100%" id="leftdashboardtable">
                                 <thead>
@@ -321,15 +312,12 @@
                                             <span style="padding-left:80px;">Quality</span>
                                         </div>
                                     </th>
-                                    <!--<th>Issue?</th>-->
                                 </tr>
                                 <tr>
                                     <th></th>
                                     <th></th>
                                     <th></th>
                                     <th>
-                                        <!--<a class="label label-success " href="#" role="button">Dislike</a>-->
-                                        <!--<a class="label label-success" href="#" role="button">Like</a>-->
                                         <span class="glyphicon glyphicon-thumbs-up pull-left" aria-hidden="true"></span>
                                         <span class="glyphicon glyphicon-thumbs-down pull-right" aria-hidden="true"></span>
                                     </th>
@@ -357,12 +345,12 @@
                             <header>
                                 <h5>
                                     Video
-                                    <span class="glyphicon glyphicon-heart-empty pull-right"></span>
+                                    <span class="glyphicon glyphicon-heart pull-right" id="favicon" value=-1></span>
                                 </h5>
                             </header>
                             <div class="comment-head-dash clearfix">
-                                <div class="commenter-name-dash pull-left">Viewer hits</div>
-                                <div class="days-dash pull-right" id="viewcount">
+                                <div class="pull-left">Viewer hits</div>
+                                <div class="pull-right" id="viewcount">
                                     <?php include("rightDashboardStats.php"); ?>
                                 </div>
                             </div>

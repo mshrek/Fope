@@ -6,6 +6,8 @@
 if (typeof jQuery == "undefined") {
 } else {
     $(document).ready(function () {
+            //clicked video sorted_id
+            var clickedId;
 
             //Star rating section
             //audio
@@ -74,10 +76,16 @@ if (typeof jQuery == "undefined") {
 
             //assigns id on row click
             $('body').delegate('.sendIdOnClick', 'click', function () {
-                var clickedId = $(this).closest('tr').find('td:first').text();
+                clickedId = $(this).closest('tr').find('td:first').text();
                 fetchfromMysqlDatabase(clickedId);
             });
 
+        $('body').delegate('.warning', 'click', function (){
+                alert('hello!');
+                $(this).css("color", "#FF3300");
+                warningId=($(this).closest('tr').find('span:last').attr('id')).split('g')[1];
+                reportBroken(warningId);
+            })
 
             //onclick event , sends selected id of the row to the fetchvideourl.php script
             function fetchfromMysqlDatabase(onClickId) {
@@ -85,7 +93,7 @@ if (typeof jQuery == "undefined") {
                     type: "POST",
                     dataType: "html",
                     data: {"id": onClickId},
-                    url: "fetchVideoURL.php",
+                    url: "../php/fetchVideoURL.php",
                     cache: false,
                     beforeSend: function () {
                         $('#videoPreview').html('<iframe src="http://www.youtube.com/embed/" width="100%" height="289px" frameborder="0" allowfullscreen></iframe>');
@@ -99,7 +107,7 @@ if (typeof jQuery == "undefined") {
                     type: "POST",
                     dataType: "html",
                     data: {"id": onClickId},
-                    url: "rightDashboardStats.php",
+                    url: "../php/rightDashboardStats.php",
                     cache: false,
                     beforeSend: function () {
                         $('#viewcount').html('NA');
@@ -111,6 +119,74 @@ if (typeof jQuery == "undefined") {
                 });
             }
 
+
+            $('#audioRating').on('click',function(){
+                valueA=parseInt($star_ratingA.siblings('input.rating-value').val());
+                setRatingValue("audioRating",valueA,clickedId);
+            })
+
+            $('#videoRating').on('click',function(){
+                valueV=parseInt($star_ratingV.siblings('input.rating-value').val());
+                setRatingValue("videoRating",valueV,clickedId);
+            })
+
+            $('#contentRating').on('click',function(){
+                valueC=parseInt($star_ratingC.siblings('input.rating-value').val());
+                setRatingValue("contentRating",valueC,clickedId);
+            })
+
+            $('#favicon').on('click',function(){
+                getcolor=rgbToHex($('#favicon').css("color"));
+
+                if(getcolor=="#676a6c")
+                    setColor("#cc433d");
+                else
+                    setColor("#676a6c");
+
+                function rgbToHex(a){
+                    a=a.replace(/[^\d,]/g,"").split(",");
+                    return"#"+((1<<24)+(+a[0]<<16)+(+a[1]<<8)+ +a[2]).toString(16).slice(1)
+                }
+                function setColor(colorcode){
+                    $('#favicon').css("color",colorcode);
+                }
+                setRatingValue("favrating",1,clickedId);
+            })
+
+
+            function setRatingValue(ratingfor,value,clickedId){
+                $.ajax({
+                    type: "POST",
+                    dataType: "html",
+                    data: {"ratingfor":ratingfor,"value":value,"elementID":clickedId},
+                    url: "../php/ratingFavs.php",
+                    cache: false,
+                    beforeSend: function () {
+                        //$('#viewcount').html('NA');
+                        //alert(onClickId);
+                    },
+                    success: function (htmldata) {
+                        //$('#viewcount').html(htmldata);
+                    }
+                });
+            }
+
+            function reportBroken(clickedId){
+                $.ajax({
+                    type: "POST",
+                    dataType: "html",
+                    data: {"elementID":clickedId},
+                    url: "../php/linkBroken.php",
+                    cache: false,
+                    beforeSend: function () {
+                        //$('#viewcount').html('NA');
+                        //alert(onClickId);
+                    },
+                    success: function (htmldata) {
+                        //$('#viewcount').html(htmldata);
+                    }
+                });
+            }
         }//end of ready function
     );//end of ready function
 }//end of else

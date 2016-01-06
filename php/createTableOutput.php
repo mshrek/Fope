@@ -29,7 +29,7 @@ else {
             echo "<span col-xs-4 class='text-danger col-xs-offset-2  col-xs-2' style='padding-right:10px;'>" . $row["audiorating"] . "</span>";
             echo "<span col-xs-4 class='text-warning qualityCenter col-xs-2' style='padding-left:15px;'>" . $row["videorating"] . "</span>";
             echo "<span col-xs-4 class='text-success col-xs-2' style='padding-left:10px;'>" . $row["contentrating"] . "</span>";
-            echo "<span class='glyphicon glyphicon-alert col-xs-2' aria-hidden='true'></span>";
+            echo "<span class='glyphicon glyphicon-warning-sign col-xs-2 warning' aria-hidden='true' id='warning".$row['sorted_id']."'></span>";
             echo "</td>";
             echo "</tr>";
         }

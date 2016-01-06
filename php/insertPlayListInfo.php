@@ -4,9 +4,11 @@ $username = "root";
 $password = "MyNewPass";
 $dbname ="Playlist";
 
+$conn = new mysqli($servername, $username, $password,$dbname);
+
 $rest_json = file_get_contents("php://input");
 parse_str($rest_json,$_POST);
-$conn = new mysqli($servername, $username, $password,$dbname);
+
 
 // Check connection
 if ($conn->connect_error) {

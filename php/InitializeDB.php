@@ -7,8 +7,8 @@
     <title>Title Page</title>
 
     <!-- Bootstrap CSS -->
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/jquery.dataTables.min.css" rel="stylesheet" type="text/css">
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/jquery.dataTables.min.css" rel="stylesheet" type="text/css">
 
 
     <!--    added for bootstrap styling-->
@@ -20,12 +20,12 @@
 
     </script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/default.js"></script>
-    <script src="js/jquery.dataTables.min.js"></script>
-    <script src="js/jquery.tablesorter.min.js"></script>
-    <script src="js/loadYoutubeData.js"></script>
-    <script src="js/mainPageJS.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/default.js"></script>
+    <script src="../js/jquery.dataTables.min.js"></script>
+    <script src="../js/jquery.tablesorter.min.js"></script>
+    <script src="../js/loadYoutubeData.js"></script>
+    <script src="../js/mainPageJS.js"></script>
     <script src="https://apis.google.com/js/plusone.js"></script>
     <script src="https://apis.google.com/js/client:plusone.js"></script>
 
