@@ -112,3 +112,7 @@ tr th{
 .glyphicon-heart{
     font-size: 1.3em;
 }
+
+.warning-red {
+    color: #cc433d;
+}

@@ -20,7 +20,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 else {
-    $sqlquery = "SELECT viewcount from playlist1 where id=".$_POST["id"].";";
+    $sqlquery = "SELECT viewcount,audiorating,videorating,contentrating,favrating from playlist1 where sorted_id=".$_POST["id"].";";
 
     //echo $sqlquery;
     $results = $conn->query($sqlquery);
@@ -28,10 +28,7 @@ else {
 //echo ($result);
     if ($results->num_rows > 0) {
         while ($row = $results->fetch_assoc()) {
-            echo $row["viewcount"];
-
-
-
+            echo ($row["viewcount"].",".$row["audiorating"].",".$row["videorating"].",".$row["contentrating"].",".$row["favrating"]);
         }
     }
     else{

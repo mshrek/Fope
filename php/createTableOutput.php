@@ -12,7 +12,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 else {
-    $sqlquery ="SELECT sorted_id,title,duration,likes,dislikes,audiorating,videorating,contentrating FROM playlist1;";
+    $sqlquery ="SELECT sorted_id,title,duration,likes,dislikes,audiorating,videorating,contentrating,brokenlink FROM playlist1;";
     $results=$conn->query($sqlquery);
 
     if ($results->num_rows > 0) {
@@ -29,7 +29,10 @@ else {
             echo "<span col-xs-4 class='text-danger col-xs-offset-2  col-xs-2' style='padding-right:10px;'>" . $row["audiorating"] . "</span>";
             echo "<span col-xs-4 class='text-warning qualityCenter col-xs-2' style='padding-left:15px;'>" . $row["videorating"] . "</span>";
             echo "<span col-xs-4 class='text-success col-xs-2' style='padding-left:10px;'>" . $row["contentrating"] . "</span>";
-            echo "<span class='glyphicon glyphicon-warning-sign col-xs-2 warning' aria-hidden='true' id='warning".$row['sorted_id']."'></span>";
+            if($row["brokenlink"]==1)
+                echo "<span class='glyphicon glyphicon-warning-sign warning-red col-xs-2 warning' bg-color='#ffff00' aria-hidden='true' id='warning".$row['sorted_id']."'></span>";
+            else
+                echo "<span class='glyphicon glyphicon-warning-sign col-xs-2 warning' bg-color='#ffff00' aria-hidden='true' id='warning".$row['sorted_id']."'></span>";
             echo "</td>";
             echo "</tr>";
         }

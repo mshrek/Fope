@@ -26,7 +26,7 @@ if (typeof jQuery == "undefined") {
             $star_ratingA.on('click', function () {
                 $star_ratingA.siblings('input.rating-value').val($(this).data('rating'));
                 return SetRatingStarA();
-            });
+            });//end of audio
 
             //video
             var $star_ratingV = $('.star-ratingV .fa');
@@ -40,11 +40,11 @@ if (typeof jQuery == "undefined") {
                     }
                 });
             };
-
             $star_ratingV.on('click', function () {
                 $star_ratingV.siblings('input.rating-value').val($(this).data('rating'));
                 return SetRatingStarV();
-            });
+            });// end of video
+
 
             //content
             var $star_ratingC = $('.star-ratingC .fa');
@@ -58,11 +58,10 @@ if (typeof jQuery == "undefined") {
                     }
                 });
             };
-
             $star_ratingC.on('click', function () {
                 $star_ratingC.siblings('input.rating-value').val($(this).data('rating'));
                 return SetRatingStarC();
-            });
+            });// end of content
 
             //Add scrollbar
             $('#playList').DataTable({
@@ -77,15 +76,28 @@ if (typeof jQuery == "undefined") {
             //assigns id on row click
             $('body').delegate('.sendIdOnClick', 'click', function () {
                 clickedId = $(this).closest('tr').find('td:first').text();
+                resetRatingValues();
                 fetchfromMysqlDatabase(clickedId);
             });
 
-        $('body').delegate('.warning', 'click', function (){
-                alert('hello!');
-                $(this).css("color", "#FF3300");
+            //row click handled across pagination
+            $('body').delegate('.warning', 'click', function (){
+                //$(this).css("color", "#FF3300");
+                $clickedElement=$(this);
+                getcolor=rgbToHex($(this).css("color"));
+                if(getcolor=="#676a6c")
+                    setColor("#cc433d");
+                else
+                    setColor("#676a6c");
+
+                function setColor(colorcode){
+                    $clickedElement.css("color",colorcode);
+                }
                 warningId=($(this).closest('tr').find('span:last').attr('id')).split('g')[1];
+                resetRatingValues();
                 reportBroken(warningId);
             })
+
 
             //onclick event , sends selected id of the row to the fetchvideourl.php script
             function fetchfromMysqlDatabase(onClickId) {
@@ -105,21 +117,36 @@ if (typeof jQuery == "undefined") {
                 });
                 $.ajax({
                     type: "POST",
-                    dataType: "html",
+                    dataType: "text",
                     data: {"id": onClickId},
                     url: "../php/rightDashboardStats.php",
                     cache: false,
                     beforeSend: function () {
                         $('#viewcount').html('NA');
-                        //alert(onClickId);
                     },
-                    success: function (htmldata) {
-                        $('#viewcount').html(htmldata);
+                    success: function (data) {
+                        dataVal = data.split(",");
+                        $('#viewcount').html(dataVal[0]);
+                        starArr=[$star_ratingA,$star_ratingV,$star_ratingC];
+                        for(j=0;j<starArr.length;j++){
+                            starArr[j].siblings('input.rating-value').val(dataVal[j+1]);
+                            starArr[j].each(function () {
+                                if (parseInt(starArr[j].siblings('input.rating-value').val()) >= parseInt($(this).data('rating'))) {
+                                    $(this).removeClass('fa-star-o').addClass('fa-star');
+                                }
+                            });
+                        }
+                        favrating=dataVal[4];
+                        if(favrating==1)
+                        {
+                            $('#favicon').css("color","#cc433d");
+                        }
+
                     }
                 });
             }
 
-
+            //Section for capturing user clicked values and storing them in db
             $('#audioRating').on('click',function(){
                 valueA=parseInt($star_ratingA.siblings('input.rating-value').val());
                 setRatingValue("audioRating",valueA,clickedId);
@@ -153,7 +180,13 @@ if (typeof jQuery == "undefined") {
                 setRatingValue("favrating",1,clickedId);
             })
 
+            //function for rgb to hex code conversion
+            function rgbToHex(a){
+                a=a.replace(/[^\d,]/g,"").split(",");
+                return"#"+((1<<24)+(+a[0]<<16)+(+a[1]<<8)+ +a[2]).toString(16).slice(1)
+            }
 
+            //For setting the int values for audio,video,content and fav
             function setRatingValue(ratingfor,value,clickedId){
                 $.ajax({
                     type: "POST",
@@ -171,6 +204,20 @@ if (typeof jQuery == "undefined") {
                 });
             }
 
+            //resetting star values on video change
+            function resetRatingValues(){
+                $('#favicon').css("color","#676a6c");
+                startArr=[$star_ratingA,$star_ratingV,$star_ratingC];
+                for(i=0;i<startArr.length;i++) {
+                    item = startArr[i];
+                    item.each(function () {
+                        $(this).removeClass('fa-star');
+                        $(this).addClass('fa-star-o');
+                    })
+                }
+            }
+
+            //For setting reportbroken int value
             function reportBroken(clickedId){
                 $.ajax({
                     type: "POST",
