@@ -14,6 +14,7 @@ $dbname ="Playlist";
 $rest_json = file_get_contents("php://input");
 parse_str($rest_json,$_POST);
 $elementID=$_POST['elementID'];
+$value=$_POST["value"];
 
 $conn = new mysqli($servername, $username, $password,$dbname);
 
@@ -24,7 +25,7 @@ else {
 
     echo $ratingfor . " " . $value . " " . $elementID;
 
-    $sqlquery = "UPDATE playlist1 set brokenlink = 1" . " where sorted_id = " . $elementID . ";";
+    $sqlquery = "UPDATE playlist1 set brokenlink = ". $value . " where sorted_id = " . $elementID . ";";
     $results = $conn->query($sqlquery);
     if ($results->num_rows > 0) {
         while ($row = $results->fetch_assoc()) {

@@ -63,15 +63,24 @@ if (typeof jQuery == "undefined") {
                 return SetRatingStarC();
             });// end of content
 
-            //Add scrollbar
+            //Add scrollbar and initialize the data table
             $('#playList').DataTable({
                 select: {
                     style: 'os'
                 },
                 "scrollY": "200px",
                 "scrollCollapse": true,
+                "fnInitComplete": function() {
+                    selectFirstRow();
+                },
                 "paging": true
             });
+
+            //selects first row as default after initialization
+            function selectFirstRow() {
+                resetRatingValues();
+                fetchfromMysqlDatabase(1);
+            }
 
             //assigns id on row click
             $('body').delegate('.sendIdOnClick', 'click', function () {
@@ -84,23 +93,32 @@ if (typeof jQuery == "undefined") {
             $('body').delegate('.warning', 'click', function (){
                 //$(this).css("color", "#FF3300");
                 $clickedElement=$(this);
+
                 getcolor=rgbToHex($(this).css("color"));
                 if(getcolor=="#676a6c")
+                {
                     setColor("#cc433d");
+                    brokenVal=1
+                }
                 else
+                {
                     setColor("#676a6c");
+                    brokenVal=0;
+                }
 
                 function setColor(colorcode){
                     $clickedElement.css("color",colorcode);
                 }
                 warningId=($(this).closest('tr').find('span:last').attr('id')).split('g')[1];
                 resetRatingValues();
-                reportBroken(warningId);
+                reportBroken(warningId,brokenVal);
             })
 
 
             //onclick event , sends selected id of the row to the fetchvideourl.php script
             function fetchfromMysqlDatabase(onClickId) {
+
+                //for right section iframe
                 $.ajax({
                     type: "POST",
                     dataType: "html",
@@ -115,6 +133,8 @@ if (typeof jQuery == "undefined") {
                         $('#videoPreview').html(htmldata);
                     }
                 });
+
+                //for left side of the dashboard
                 $.ajax({
                     type: "POST",
                     dataType: "text",
@@ -165,10 +185,14 @@ if (typeof jQuery == "undefined") {
             $('#favicon').on('click',function(){
                 getcolor=rgbToHex($('#favicon').css("color"));
 
-                if(getcolor=="#676a6c")
+                if(getcolor=="#676a6c") {
                     setColor("#cc433d");
-                else
+                    favVal=1;
+                }
+                else {
                     setColor("#676a6c");
+                    favVal=0;
+                }
 
                 function rgbToHex(a){
                     a=a.replace(/[^\d,]/g,"").split(",");
@@ -177,7 +201,7 @@ if (typeof jQuery == "undefined") {
                 function setColor(colorcode){
                     $('#favicon').css("color",colorcode);
                 }
-                setRatingValue("favrating",1,clickedId);
+                setRatingValue("favrating",favVal,clickedId);
             })
 
             //function for rgb to hex code conversion
@@ -218,11 +242,11 @@ if (typeof jQuery == "undefined") {
             }
 
             //For setting reportbroken int value
-            function reportBroken(clickedId){
+            function reportBroken(clickedId,brokenVal){
                 $.ajax({
                     type: "POST",
                     dataType: "html",
-                    data: {"elementID":clickedId},
+                    data: {"elementID":clickedId,"value":brokenVal},
                     url: "../php/linkBroken.php",
                     cache: false,
                     beforeSend: function () {
@@ -234,6 +258,10 @@ if (typeof jQuery == "undefined") {
                     }
                 });
             }
+
+            /*support functions
+             */
+
         }//end of ready function
     );//end of ready function
 }//end of else

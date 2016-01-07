@@ -28,10 +28,7 @@ else {
 
 echo $ratingfor." ".$value." ".$elementID;
 
-if($ratingfor!='favrating')
-    $sqlquery = "UPDATE playlist1 set ".$choice."=".$value." where sorted_id =".$elementID.";";
-else
-    $sqlquery = "UPDATE playlist1 set favrating=1 where sorted_id =".$elementID.";";
+$sqlquery = "UPDATE playlist1 set ".$choice."=".$value." where sorted_id =".$elementID.";";
 
 $results = $conn->query($sqlquery);
 if ($results->num_rows > 0) {
