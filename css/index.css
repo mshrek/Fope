@@ -116,3 +116,9 @@ tr th{
 .warning-red {
     color: #cc433d;
 }
+
+.carousalWrapper{
+    margin-top:10px;
+    padding:5px;
+    color:#fff;
+}

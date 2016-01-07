@@ -28,7 +28,7 @@ else {
 //echo ($result);
     if ($results->num_rows > 0) {
         while ($row = $results->fetch_assoc()) {
-            echo '<iframe src="http://www.youtube.com/embed/'.$row['videolink'].'" width="100%" height="289px" frameborder="0" allowfullscreen></iframe>';
+            echo '<iframe src="http://www.youtube.com/embed/'.$row['videolink'].'" width="100%" height="289px" frameborder="1" allowfullscreen></iframe>';
         }
     }
     else{

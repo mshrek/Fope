@@ -3,6 +3,7 @@ html, body{
     background-color: #f3f3f4;
     color: #676a6c;
     height:100%;
+    text-rendering:optimizeLegibility;
 }
 
 thead, tbody { font-size:0.9em;}

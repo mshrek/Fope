@@ -15,6 +15,11 @@
     <link href="../css/jquery.dataTables.min.css" rel="stylesheet" type="text/css">
     <!--    added for bootstrap styling-->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/s/bs/dt-1.10.10,se-1.1.0/datatables.min.css"/>
+    <!-- Shared assets -->
+    <!--    <link rel="stylesheet" type="text/css" href="../css/style.css">-->
+
+    <!-- Example assets -->
+    <link rel="stylesheet" type="text/css" href="../css/jcarousel.ajax.css">
 
 
 
@@ -25,10 +30,13 @@
     <script type="text/javascript" src="https://cdn.datatables.net/s/bs/dt-1.10.10,se-1.1.0/datatables.min.js"></script>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/carousaljquery.js"></script>
+    <script type="text/javascript" src="../js/jquery.jcarousel.min.js"></script>
+    <script type="text/javascript" src="../js/jcarousel.ajax.js"></script>
 
 
-    </script>
+
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="../js/bootstrap.min.js"></script>
     <script src="../js/default.js"></script>
@@ -339,7 +347,7 @@
                         </div>
                     </div>
 
-<!--                    Below portion can be put in rightDashboardStats.php-->
+                    <!--                    Below portion can be put in rightDashboardStats.php-->
                     <div class="col-md-4 dashboard-right-cell">
                         <div class="admin-content-con clearfix">
                             <header>
@@ -355,10 +363,10 @@
                                 </div>
                             </div>
                             <div id="videoPreview">
-<!--                            <iframe-->
-<!--                                src="http://www.youtube.com/embed/nIsCs9_-LP8" width=100% height=289px"-->
-<!--                                frameborder="0" allowfullscreen>-->
-<!--                            </iframe>-->
+                                <!--                            <iframe-->
+                                <!--                                src="http://www.youtube.com/embed/nIsCs9_-LP8" width=100% height=289px"-->
+                                <!--                                frameborder="0" allowfullscreen>-->
+                                <!--                            </iframe>-->
                             </div>
                             <div class="clearfix">
                                 <br/>
@@ -396,10 +404,48 @@
                             </div>
                         </div>
                     </div>
-<!--                    Till above portion can be put in rightDashboardStats.php-->
-
+                    <!--                    Till above portion can be put in rightDashboardStats.php-->
                 </div>
 
+                <!--Carousal section-->
+<!--                <div class="row clearfix">-->
+<!--                    <div class="wrapper">-->
+<!--                        <div class="jcarousel-wrapper">-->
+<!--                            <div class="jcarousel">-->
+<!--                                <div class="loading">Loading carousel items...</div>-->
+<!--                            </div>-->
+<!---->
+<!--                            <a href="#" class="jcarousel-control-prev">&lsaquo;</a>-->
+<!--                            <a href="#" class="jcarousel-control-next">&rsaquo;</a>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+                <div class="clearfix ">
+                <div class="row col-md-12 carousalWrapper">
+                    <div>
+<!--                        <SCRIPT charset="utf-8" type="text/javascript" src="http://ws-in.amazon-adsystem.com/widgets/q?rt=tf_cw&ServiceVersion=20070822&MarketPlace=IN&ID=V20070822%2FIN%2Fwwwgyanrootsc-21%2F8010%2Fa9dee66e-3966-4cd0-b551-7bd96e8980a0&Operation=GetScriptTemplate"> </SCRIPT> <NOSCRIPT><A rel="nofollow" HREF="http://ws-in.amazon-adsystem.com/widgets/q?rt=tf_cw&ServiceVersion=20070822&MarketPlace=IN&ID=V20070822%2FIN%2Fwwwgyanrootsc-21%2F8010%2Fa9dee66e-3966-4cd0-b551-7bd96e8980a0&Operation=NoScript">Amazon.in Widgets</A></NOSCRIPT>-->
+<!--                        <SCRIPT charset="utf-8" type="text/javascript" src="http://ws-in.amazon-adsystem.com/widgets/q?rt=tf_ssw&ServiceVersion=20070822&MarketPlace=IN&ID=V20070822%2FIN%2Fwwwgyanrootsc-21%2F8003%2Ff8ddd375-0768-49ee-83b9-b19a0e074961&Operation=GetScriptTemplate"> </SCRIPT> <NOSCRIPT><A rel="nofollow" HREF="http://ws-in.amazon-adsystem.com/widgets/q?rt=tf_ssw&ServiceVersion=20070822&MarketPlace=IN&ID=V20070822%2FIN%2Fwwwgyanrootsc-21%2F8003%2Ff8ddd375-0768-49ee-83b9-b19a0e074961&Operation=NoScript">Amazon.in Widgets</A></NOSCRIPT>-->
+                        <script charset="utf-8" type="text/javascript">
+                            amzn_assoc_ad_type = "responsive_search_widget";
+                            amzn_assoc_tracking_id = "wwwgyanrootsc-21";
+                            amzn_assoc_marketplace = "amazon";
+                            amzn_assoc_region = "IN";
+                            amzn_assoc_placement = "";
+                            amzn_assoc_search_type = "search_widget";
+                            amzn_assoc_width = 1000;
+                            amzn_assoc_height = 240;
+                            amzn_assoc_default_search_category = "";
+                            amzn_assoc_default_search_key = "java books";
+                            amzn_assoc_theme = "light";
+                            amzn_assoc_bg_color = "000000";
+                        </script>
+                        <script src="//z-in.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&Operation=GetScript&ID=OneJS&WS=1&MarketPlace=IN"></script>
+                    </div>
+                </div>
+                </div>
+                <!--End of carousal-->
+
+                <!-- footer starts here-->
                 <div class="row">
                     <footer id="admin-footer" class="clearfix">
                         <div class="pull-left"><b>Copyright</b>&copy; Fope 2015</div>

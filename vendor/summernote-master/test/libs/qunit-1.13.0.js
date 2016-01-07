@@ -1105,7 +1105,7 @@ function runLoggingCallbacks( key, scope, args ) {
   }
 }
 
-// from jquery.js
+// from carousaljquery.js
 function inArray( elem, array ) {
   if ( array.indexOf ) {
     return array.indexOf( elem );
