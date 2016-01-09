@@ -20,7 +20,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 else {
-    $sqlquery = "SELECT viewcount,audiorating,videorating,contentrating,favrating from playlist1 where sorted_id=".$_POST["id"].";";
+    $sqlquery = "SELECT viewcount,audiorating,videorating,contentrating,favrating from playlist1 where sorted_id=".$_POST["id"]." and authorid = ".$_POST["authid"].";";
 
     //echo $sqlquery;
     $results = $conn->query($sqlquery);

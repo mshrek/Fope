@@ -12,7 +12,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 else {
-    $sqlquery ="SELECT sorted_id,title,duration,likes,dislikes,audiorating,videorating,contentrating,brokenlink FROM playlist1;";
+    $sqlquery ="SELECT sorted_id,title,duration,likes,dislikes,audiorating,videorating,contentrating,brokenlink FROM playlist1 where authorid=$authid;";
     $results=$conn->query($sqlquery);
 
     if ($results->num_rows > 0) {

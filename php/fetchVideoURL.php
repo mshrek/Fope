@@ -20,15 +20,15 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 else {
-    $sqlquery = "SELECT videolink from playlist1 where sorted_id=".$_POST["id"].";";
+    $sqlquery = "SELECT videolink from playlist1 where sorted_id=".$_POST["id"]." and authorid = ".$_POST["authid"].";";
 
     //echo $sqlquery;
     $results = $conn->query($sqlquery);
 
 //echo ($result);
     if ($results->num_rows > 0) {
-        while ($row = $results->fetch_assoc()) {
-            echo '<iframe src="http://www.youtube.com/embed/'.$row['videolink'].'" width="100%" height="289px" frameborder="1" allowfullscreen></iframe>';
+        while ($rows = $results->fetch_assoc()) {
+            echo '<iframe src="http://www.youtube.com/embed/'.$rows['videolink'].'" id='.$_POST["authid"].' width="100%" height="289px" frameborder="1" allowfullscreen></iframe>';
         }
     }
     else{

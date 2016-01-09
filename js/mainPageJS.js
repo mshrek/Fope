@@ -45,7 +45,6 @@ if (typeof jQuery == "undefined") {
                 return SetRatingStarV();
             });// end of video
 
-
             //content
             var $star_ratingC = $('.star-ratingC .fa');
 
@@ -64,36 +63,40 @@ if (typeof jQuery == "undefined") {
             });// end of content
 
             //Add scrollbar and initialize the data table
-            $('#playList').DataTable({
+            $('.playList').DataTable({
                 select: {
                     style: 'os'
                 },
-                "scrollY": "200px",
+                "scrollY": "260px",
                 "scrollCollapse": true,
                 "fnInitComplete": function() {
-                    selectFirstRow();
+                    selectFirstRow($(this));
                 },
                 "paging": true
             });
 
             //selects first row as default after initialization
-            function selectFirstRow() {
-                resetRatingValues();
-                fetchfromMysqlDatabase(1);
+            function selectFirstRow(playlistObject) {
+                console.log("Play list id ="+playlistObject.attr("id"));
+                clickedId=1;
+                playlistID=playlistObject.attr("id");
+                resetRatingValues(playlistID);
+                fetchfromMysqlDatabase(clickedId,playlistID);
             }
 
             //assigns id on row click
             $('body').delegate('.sendIdOnClick', 'click', function () {
                 clickedId = $(this).closest('tr').find('td:first').text();
-                resetRatingValues();
-                fetchfromMysqlDatabase(clickedId);
+                onClickAuthid=$(this).closest('table').attr('id');
+                resetRatingValues(onClickAuthid);
+                fetchfromMysqlDatabase(clickedId,onClickAuthid);
             });
 
-            //row click handled across pagination
+            //warning sign with row click handled across pagination
             $('body').delegate('.warning', 'click', function (){
                 //$(this).css("color", "#FF3300");
                 $clickedElement=$(this);
-
+                onClickAuthid=$(this).closest('table').attr('id');
                 getcolor=rgbToHex($(this).css("color"));
                 if(getcolor=="#676a6c")
                 {
@@ -110,43 +113,46 @@ if (typeof jQuery == "undefined") {
                     $clickedElement.css("color",colorcode);
                 }
                 warningId=($(this).closest('tr').find('span:last').attr('id')).split('g')[1];
-                resetRatingValues();
-                reportBroken(warningId,brokenVal);
+                console.log("warning symbol belongs to author id ="+onClickAuthid);
+                resetRatingValues(onClickAuthid);
+                reportBroken(warningId,brokenVal,onClickAuthid);
             })
 
-
             //onclick event , sends selected id of the row to the fetchvideourl.php script
-            function fetchfromMysqlDatabase(onClickId) {
-
+            function fetchfromMysqlDatabase(onClickId,authid) {
+                console.log("fetched auth id ="+authid);
                 //for right section iframe
                 $.ajax({
                     type: "POST",
                     dataType: "html",
-                    data: {"id": onClickId},
+                    data: {"id": onClickId,"authid":authid},
                     url: "../php/fetchVideoURL.php",
                     cache: false,
                     beforeSend: function () {
-                        $('#videoPreview').html('<iframe src="http://www.youtube.com/embed/" width="100%" height="289px" frameborder="0" allowfullscreen></iframe>');
+                        $('#videoPreview'+authid).html('<iframe src="http://www.youtube.com/embed/" width="100%" height="289px" frameborder="0" allowfullscreen></iframe>');
+                        //$('#videoPreview1002').html('<iframe src="http://www.youtube.com/embed/" width="100%" height="289px" frameborder="0" allowfullscreen></iframe>');
+                        console.log('current authid ='+authid);
                         //alert(onClickId);
                     },
                     success: function (htmldata) {
-                        $('#videoPreview').html(htmldata);
+                        $('#videoPreview'+authid).html(htmldata);
                     }
                 });
 
-                //for left side of the dashboard
+                //for right side of the dashboard
                 $.ajax({
                     type: "POST",
                     dataType: "text",
-                    data: {"id": onClickId},
+                    data: {"id": onClickId,"authid":authid},
                     url: "../php/rightDashboardStats.php",
                     cache: false,
                     beforeSend: function () {
-                        $('#viewcount').html('NA');
+                        $('#viewcount'+authid).html('NA');
                     },
                     success: function (data) {
+                        console.log('tag current authid ='+authid);
                         dataVal = data.split(",");
-                        $('#viewcount').html(dataVal[0]);
+                        $('#viewcount'+authid).html(dataVal[0]);
                         starArr=[$star_ratingA,$star_ratingV,$star_ratingC];
                         for(j=0;j<starArr.length;j++){
                             starArr[j].siblings('input.rating-value').val(dataVal[j+1]);
@@ -159,7 +165,7 @@ if (typeof jQuery == "undefined") {
                         favrating=dataVal[4];
                         if(favrating==1)
                         {
-                            $('#favicon').css("color","#cc433d");
+                            $('#favicon'+authid).css("color","#cc433d");
                         }
 
                     }
@@ -167,23 +173,32 @@ if (typeof jQuery == "undefined") {
             }
 
             //Section for capturing user clicked values and storing them in db
-            $('#audioRating').on('click',function(){
-                valueA=parseInt($star_ratingA.siblings('input.rating-value').val());
-                setRatingValue("audioRating",valueA,clickedId);
+            $('.audioRating').on('click',function(){
+                audioRatingID=$(this).attr("id");
+                console.log("id ="+audioRatingID);
+                valueA=parseInt($("#"+audioRatingID .fa).siblings('input.rating-value').val());
+                setRatingValue("audioRating",valueA,clickedId,audioRatingID);
             })
 
-            $('#videoRating').on('click',function(){
-                valueV=parseInt($star_ratingV.siblings('input.rating-value').val());
-                setRatingValue("videoRating",valueV,clickedId);
+            $('.videoRating').on('click',function(){
+                videoRatingID=$(this).attr("id");
+                console.log("id ="+videoRatingID);
+                valueV=parseInt($("#"+videoRatingID .fa).siblings('input.rating-value').val());
+                setRatingValue("videoRating",valueV,clickedId,videoRatingID);
             })
 
-            $('#contentRating').on('click',function(){
-                valueC=parseInt($star_ratingC.siblings('input.rating-value').val());
-                setRatingValue("contentRating",valueC,clickedId);
+            $('.contentRating').on('click',function(){
+                contentRatingID=$(this).attr("id");
+                console.log("id ="+contentRatingID);
+                valueC=parseInt($("#"+contentRatingID .fa).siblings('input.rating-value').val());
+                setRatingValue("contentRating",valueC,clickedId,contentRatingID);
             })
 
-            $('#favicon').on('click',function(){
-                getcolor=rgbToHex($('#favicon').css("color"));
+            //to set the favicon values..all OK
+            $('.favicon').on('click',function(){
+                faviconID=$(this).attr("id");
+                console.log("favicon with id ="+faviconID+" is clicked");
+                getcolor=rgbToHex($('#'+faviconID).css("color"));
 
                 if(getcolor=="#676a6c") {
                     setColor("#cc433d");
@@ -199,9 +214,9 @@ if (typeof jQuery == "undefined") {
                     return"#"+((1<<24)+(+a[0]<<16)+(+a[1]<<8)+ +a[2]).toString(16).slice(1)
                 }
                 function setColor(colorcode){
-                    $('#favicon').css("color",colorcode);
+                    $('#'+faviconID).css("color",colorcode);
                 }
-                setRatingValue("favrating",favVal,clickedId);
+                setRatingValue("favrating",favVal,clickedId,faviconID);
             })
 
             //function for rgb to hex code conversion
@@ -211,11 +226,14 @@ if (typeof jQuery == "undefined") {
             }
 
             //For setting the int values for audio,video,content and fav
-            function setRatingValue(ratingfor,value,clickedId){
+            function setRatingValue(ratingfor,value,clickedId,objectID){
+                var numberPattern = /\d+/g;
+                var extractedAuthID=objectID.match(numberPattern)[0];
+                console.log("TAG1 : Extracted auth id ="+extractedAuthID+" with value = "+value+"  rating for ="+ratingfor+" and element ID="+clickedId);
                 $.ajax({
                     type: "POST",
                     dataType: "html",
-                    data: {"ratingfor":ratingfor,"value":value,"elementID":clickedId},
+                    data: {"ratingfor":ratingfor,"value":value,"elementID":clickedId,"authid":extractedAuthID},
                     url: "../php/ratingFavs.php",
                     cache: false,
                     beforeSend: function () {
@@ -228,9 +246,10 @@ if (typeof jQuery == "undefined") {
                 });
             }
 
-            //resetting star values on video change
-            function resetRatingValues(){
-                $('#favicon').css("color","#676a6c");
+            //resetting star values and favicon color on video change
+            function resetRatingValues(playlistID){
+                $('#favicon'+playlistID).css("color","#676a6c");
+                console.log("resetting value for id ="+playlistID);
                 startArr=[$star_ratingA,$star_ratingV,$star_ratingC];
                 for(i=0;i<startArr.length;i++) {
                     item = startArr[i];
@@ -241,12 +260,13 @@ if (typeof jQuery == "undefined") {
                 }
             }
 
-            //For setting reportbroken int value
-            function reportBroken(clickedId,brokenVal){
+            //For setting reportbroken int value..all OK
+            function reportBroken(clickedId,brokenVal,authid){
+                console.log("Broken value for "+authid+" = "+brokenVal);
                 $.ajax({
                     type: "POST",
                     dataType: "html",
-                    data: {"elementID":clickedId,"value":brokenVal},
+                    data: {"elementID":clickedId,"value":brokenVal,"authid":authid},
                     url: "../php/linkBroken.php",
                     cache: false,
                     beforeSend: function () {
@@ -258,8 +278,6 @@ if (typeof jQuery == "undefined") {
                     }
                 });
             }
-
-
             /*support functions
              */
 

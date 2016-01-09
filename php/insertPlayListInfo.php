@@ -45,8 +45,8 @@ else{
 //    echo 'Already published dates ='.implode(",",$alreadyPublishedDates);
 //    if(!in_array($ppublishedAt,$alreadyPublishedDates)) {
         $sqlquery = "INSERT INTO playlist1 VALUES (null,$ptitle,$pduration,
-	    $plikes,$pdislikes,$audiorating,$videorating,$contentrating,$reportbroken,
-	    $authorname,$authorid,$pviewcount,$pcommentscount,$pvideolink,$pimageURL,$ppublishedAt,null);
+	    $plikes,$pdislikes,$audiorating,$videorating,$contentrating,
+	    $authorname,$authorid,$pviewcount,$pcommentscount,$pvideolink,$pimageURL,$ppublishedAt,null,0,0);
 	    ";
 
 //        $reIndexQuery1= "SET @x=0;";

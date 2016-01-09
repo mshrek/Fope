@@ -100,7 +100,7 @@ tr th{
     cursor: pointer;
 }
 
-#feedback{
+.feedback{
     margin: 0px;
     padding: 0px;
 }
