@@ -8,32 +8,37 @@ if (typeof jQuery == "undefined") {
     $(document).ready(function () {
             //clicked video sorted_id
             var clickedId;
-
             //Star rating section
+
             //audio
             var $star_ratingA = $('.star-ratingA .fa');
-
-            var SetRatingStarA = function () {
-                return $star_ratingA.each(function () {
-                    if (parseInt($star_ratingA.siblings('input.rating-value').val()) >= parseInt($(this).data('rating'))) {
+            var SetRatingStarA = function (audioRatingID) {
+                console.log("passed param ="+audioRatingID);
+                $selectedAudioObj=$('#'+audioRatingID + '.star-ratingA .fa');
+                console.log("passed param class ="+$selectedAudioObj.attr("class"));
+                return $selectedAudioObj.each(function () {
+                    if (parseInt($selectedAudioObj.siblings('input.rating-value').val()) >= parseInt($(this).data('rating'))) {
                         return $(this).removeClass('fa-star-o').addClass('fa-star');
                     } else {
                         return $(this).removeClass('fa-star').addClass('fa-star-o');
                     }
                 });
             };
-
             $star_ratingA.on('click', function () {
+                console.log($(this).data('rating'));
                 $star_ratingA.siblings('input.rating-value').val($(this).data('rating'));
-                return SetRatingStarA();
-            });//end of audio
+                return SetRatingStarA($(this).closest('div').attr('id'));
+            });// end of audio .checking the clicked value and setting number of stars according to that
+
 
             //video
             var $star_ratingV = $('.star-ratingV .fa');
-
-            var SetRatingStarV = function () {
-                return $star_ratingV.each(function () {
-                    if (parseInt($star_ratingV.siblings('input.rating-value').val()) >= parseInt($(this).data('rating'))) {
+            var SetRatingStarV = function (videoRatingID) {
+                console.log("passed param ="+videoRatingID);
+                $selectedVideoObj=$('#'+videoRatingID + '.star-ratingV .fa');
+                console.log("passed param class ="+$selectedVideoObj.attr("class"));
+                return $selectedVideoObj.each(function () {
+                    if (parseInt($selectedVideoObj.siblings('input.rating-value').val()) >= parseInt($(this).data('rating'))) {
                         return $(this).removeClass('fa-star-o').addClass('fa-star');
                     } else {
                         return $(this).removeClass('fa-star').addClass('fa-star-o');
@@ -41,16 +46,20 @@ if (typeof jQuery == "undefined") {
                 });
             };
             $star_ratingV.on('click', function () {
+                console.log($(this).data('rating'));
                 $star_ratingV.siblings('input.rating-value').val($(this).data('rating'));
-                return SetRatingStarV();
-            });// end of video
+                return SetRatingStarV($(this).closest('div').attr('id'));
+            });// end of video .checking the clicked value and setting number of stars according to that
+
 
             //content
             var $star_ratingC = $('.star-ratingC .fa');
-
-            var SetRatingStarC = function () {
-                return $star_ratingC.each(function () {
-                    if (parseInt($star_ratingC.siblings('input.rating-value').val()) >= parseInt($(this).data('rating'))) {
+            var SetRatingStarC = function (contentRatingID) {
+                console.log("passed param ="+contentRatingID);
+                $selectedContentObj=$('#'+contentRatingID + '.star-ratingC .fa');
+                console.log("passed param class ="+$selectedContentObj.attr("class"));
+                return $selectedContentObj.each(function () {
+                    if (parseInt($selectedContentObj.siblings('input.rating-value').val()) >= parseInt($(this).data('rating'))) {
                         return $(this).removeClass('fa-star-o').addClass('fa-star');
                     } else {
                         return $(this).removeClass('fa-star').addClass('fa-star-o');
@@ -58,9 +67,11 @@ if (typeof jQuery == "undefined") {
                 });
             };
             $star_ratingC.on('click', function () {
+                console.log($(this).data('rating'));
                 $star_ratingC.siblings('input.rating-value').val($(this).data('rating'));
-                return SetRatingStarC();
-            });// end of content
+                return SetRatingStarC($(this).closest('div').attr('id'));
+            });// end of content. checking the clicked value and setting number of stars according to that
+
 
             //Add scrollbar and initialize the data table
             $('.playList').DataTable({
@@ -118,7 +129,7 @@ if (typeof jQuery == "undefined") {
                 reportBroken(warningId,brokenVal,onClickAuthid);
             })
 
-            //onclick event , sends selected id of the row to the fetchvideourl.php script
+            //onclick event , sends selected id of the row to the fetchvideourl.php script. This is ok
             function fetchfromMysqlDatabase(onClickId,authid) {
                 console.log("fetched auth id ="+authid);
                 //for right section iframe
@@ -153,7 +164,15 @@ if (typeof jQuery == "undefined") {
                         console.log('tag current authid ='+authid);
                         dataVal = data.split(",");
                         $('#viewcount'+authid).html(dataVal[0]);
-                        starArr=[$star_ratingA,$star_ratingV,$star_ratingC];
+                        //starArr=[$star_ratingA,$star_ratingV,$star_ratingC];
+                        starAbyIDString='#audioRating'+authid+' .fa';
+                        starVbyIDString='#videoRating'+authid+' .fa';
+                        starCbyIDString='#contentRating'+authid+' .fa';
+                        $starAbyID=$(starAbyIDString);
+                        $starVbyID=$(starVbyIDString);
+                        $starCbyID=$(starCbyIDString);
+                        starArr=[$starAbyID,$starVbyID,$starCbyID];
+
                         for(j=0;j<starArr.length;j++){
                             starArr[j].siblings('input.rating-value').val(dataVal[j+1]);
                             starArr[j].each(function () {
@@ -172,25 +191,25 @@ if (typeof jQuery == "undefined") {
                 });
             }
 
-            //Section for capturing user clicked values and storing them in db
+            //Section for capturing user clicked values and storing them in db. This is ok
             $('.audioRating').on('click',function(){
                 audioRatingID=$(this).attr("id");
                 console.log("id ="+audioRatingID);
-                valueA=parseInt($("#"+audioRatingID .fa).siblings('input.rating-value').val());
+                valueA=parseInt($star_ratingA.siblings('input.rating-value').val());
                 setRatingValue("audioRating",valueA,clickedId,audioRatingID);
             })
 
             $('.videoRating').on('click',function(){
                 videoRatingID=$(this).attr("id");
                 console.log("id ="+videoRatingID);
-                valueV=parseInt($("#"+videoRatingID .fa).siblings('input.rating-value').val());
+                valueV=parseInt($star_ratingV.siblings('input.rating-value').val());
                 setRatingValue("videoRating",valueV,clickedId,videoRatingID);
             })
 
             $('.contentRating').on('click',function(){
                 contentRatingID=$(this).attr("id");
                 console.log("id ="+contentRatingID);
-                valueC=parseInt($("#"+contentRatingID .fa).siblings('input.rating-value').val());
+                valueC=parseInt($star_ratingC.siblings('input.rating-value').val());
                 setRatingValue("contentRating",valueC,clickedId,contentRatingID);
             })
 
@@ -246,13 +265,21 @@ if (typeof jQuery == "undefined") {
                 });
             }
 
-            //resetting star values and favicon color on video change
+            //resetting star values and favicon color on video change. this is ok
             function resetRatingValues(playlistID){
                 $('#favicon'+playlistID).css("color","#676a6c");
                 console.log("resetting value for id ="+playlistID);
-                startArr=[$star_ratingA,$star_ratingV,$star_ratingC];
-                for(i=0;i<startArr.length;i++) {
-                    item = startArr[i];
+                //startArr=[$star_ratingA,$star_ratingV,$star_ratingC];
+                starAbyIDString='#audioRating'+playlistID+' .fa';
+                starVbyIDString='#videoRating'+playlistID+' .fa';
+                starCbyIDString='#contentRating'+playlistID+' .fa';
+                $starAbyID=$(starAbyIDString);
+                $starVbyID=$(starVbyIDString);
+                $starCbyID=$(starCbyIDString);
+                starArr=[$starAbyID,$starVbyID,$starCbyID];
+
+                for(i=0;i<starArr.length;i++) {
+                    item = starArr[i];
                     item.each(function () {
                         $(this).removeClass('fa-star');
                         $(this).addClass('fa-star-o');
