@@ -294,7 +294,13 @@
                             </li>
 
                             <li>
-                                <a href="#" class="logout">
+                                <?php session_start();
+                                if(isset($_REQUEST['logout'])){
+                                    unset($_SESSION['fb_token']);
+                                }
+                                $logout = 'http://localhost:63342/Fope/Contact.html';
+                                echo "<a class='logout' href='".$logout."'>";
+                                 ?>
                                     <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
                                     log out
                                 </a>
