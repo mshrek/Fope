@@ -1,3 +1,5 @@
+<?php session_start();?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -278,7 +280,21 @@
                     </div>
                     <div class="col-md-7">
                         <ul class=pull-right>
-                            <li id="welcome">Welcome to your profile area</li>
+                            <?php
+                            if(isset($_SESSION['fb_token'])){
+                                echo '<li>works</li>';
+                                $sess = new FacebookSession($_SESSION['fb_token']);
+                            }
+
+                            if(isset($_REQUEST['logout'])){
+                                unset($_SESSION['fb_token']);
+                                //setcookie( "PHPSESSID", "", (time()-3600) );
+                            }
+                            $logout = 'http://localhost:63342/Fope/Contact.html';
+
+                            echo '<li id="welcome">Welcome '.$_SESSION['username'].'</li>';
+                              ?>
+<!--                            <li id="welcome">Welcome to yout profile!</li>-->
                             <li class="fixed-width">
                                 <a href="#">
                                     <span class="glyphicon glyphicon-bell" aria-hidden="true"></span>
@@ -294,11 +310,7 @@
                             </li>
 
                             <li>
-                                <?php session_start();
-                                if(isset($_REQUEST['logout'])){
-                                    unset($_SESSION['fb_token']);
-                                }
-                                $logout = 'http://localhost:63342/Fope/Contact.html';
+                                <?php
                                 echo "<a class='logout' href='".$logout."'>";
                                  ?>
                                     <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
